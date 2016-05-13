@@ -3,8 +3,6 @@ from django.conf.urls import patterns, url
 from rest_framework.urlpatterns import format_suffix_patterns
 from app import views
 
-$ git clone https://github.com/<your-github-username>/my-first-blog.gitg
-
 urlpatterns = patterns('',
                        #url(r'^(?P<id>[0-9]+)/$', views.article,),
                        url(r'^$', views.MandadoList.as_view(), name='lista_mandado'),
