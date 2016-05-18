@@ -14,9 +14,9 @@ class Mandado(models.Model):
     #                           DADOS PROCESSO
     processo = models.DecimalField(blank=True, null=True, max_digits=20, decimal_places=0)
     conducao = models.CharField(verbose_name='Condução', max_length=4, blank=True, null=True, default='AJG',
-                                choices=(('AJG', 'Assistência Judiciária Gratuita'),
-                                         ('OK', 'Recolhida Vinculada'),
-                                         ('PAGA', 'Falta Vincular'),
+                                choices=(('AJG', 'AJG'),
+                                         ('OK', 'Vinculada'),
+                                         ('PAGA', 'Não Vinculada'),
                                          ('NO', 'Não Paga'),))
 
     #                           DADOS MANDADO
