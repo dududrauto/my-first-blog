@@ -1,15 +1,15 @@
 # coding=utf-8
 from django.contrib import admin
-from app.models import Mandado, Oficial, Aviso, Atendimento, Ordem, Modelo
+from app.models import Mandado, Oficial, Aviso, Atendimento, Ordem, Modelo, Telefone
 import datetime
 from django.template import Context, Template, loader
 
-'''
+
 class TelefoneInline(admin.TabularInline):
     model = Telefone
     extra = 1
 
-
+'''
 class EnderecoInline(admin.TabularInline):
     model = Endereco
     extra = 1
@@ -75,7 +75,7 @@ class MandadoAdmin(admin.ModelAdmin):
          }),
          ('Campos de Endereço', {
              'classes': ('wide',),#ou collapse, melhor mostrnado para conferir
-             'fields': (('estado', 'cidade', 'rua', 'bairro', 'complemento'), ('ddd', 'telefone',))
+             'fields': (('estado', 'cidade', 'rua', 'bairro', 'complemento'),)# ('ddd', 'telefone',))
          }),
          ('Campos Complementares', {
              'classes': ('collapse',),
@@ -91,7 +91,7 @@ class MandadoAdmin(admin.ModelAdmin):
 
     actions = [export_aviso, make_av, make_dv, make_N, make_URG, make_con, make_cert, make_OfX]
 
-    #inlines = [EnderecoInline, TelefoneInline]
+    inlines = [TelefoneInline,] #EnderecoInline,
 
     '''
     class Media:
@@ -177,6 +177,7 @@ class AvisoAdmin(admin.ModelAdmin):
 #admin.site.register(Bairro)
 admin.site.register(Atendimento)
 admin.site.register(Mandado, MandadoAdmin)
+admin.site.register(Telefone)
 admin.site.register(Oficial)
 admin.site.register(Ordem)
 admin.site.register(Aviso, AvisoAdmin)

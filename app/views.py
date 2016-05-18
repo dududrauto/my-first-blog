@@ -1,8 +1,8 @@
 from django.shortcuts import render
 
 # Create your views here.
-from app.models import Mandado, Oficial
-from app.serializers import MandadoSerializer, OficialSerializer
+from app.models import Mandado, Oficial, Telefone
+from app.serializers import MandadoSerializer, OficialSerializer, TelefoneSerializer
 from rest_framework import generics
 from django.contrib.auth.models import User
 from rest_framework import permissions
@@ -41,10 +41,32 @@ class MandadoList(generics.ListCreateAPIView):
         user = self.request.user
         return Mandado.objects.filter(oficial__usuario=user)
 
-
 class MandadoDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Mandado.objects.all()
     serializer_class = MandadoSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,
+                           IsOwnerOrReadOnly,)
+
+class TelefoneList(generics.ListCreateAPIView):
+    queryset = Telefone.objects.all()
+    serializer_class = TelefoneSerializer
+    permission_classes = (permissions.IsAuthenticated,) #.IsAuthenticatedOrReadOnly,)
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
+    def get_queryset(self):
+        """
+        This view should return a list of all the purchases
+        for the currently authenticated user.
+        """
+        user = self.request.user
+        return Telefone.objects.filter(oficial__usuario=user)
+
+
+class TelefoneDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Telefone.objects.all()
+    serializer_class = TelefoneSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,
                            IsOwnerOrReadOnly,)
 

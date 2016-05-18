@@ -31,8 +31,11 @@ class Mandado(models.Model):
 
     #                           DADOS DESTINATARIO
     destinatario = models.CharField(max_length=100)
-    ddd = models.CharField(max_length=3, default='051')
-    telefone = models.CharField(max_length=9, blank=True, null=True)
+
+    #alteração DB em 17/05/2016
+    #ddd = models.CharField(max_length=3, default='051')
+    #telefone = models.CharField(max_length=9, blank=True, null=True)
+
     cep = models.CharField(max_length=9, null=True, blank=True, help_text='Alternativamente, preencha "Campos de Endereço".')
     pais = models.CharField(max_length=50, default="Brasil")
     estado = models.CharField(max_length=50, default= "Rio Grande do Sul")
@@ -59,11 +62,11 @@ class Mandado(models.Model):
                                                    ('NE', 'Negativa de Endereço'),
                                                    ('CE', 'Contrafé Endereço'),
                                                    ('NC', 'Não Cumprido')'''
-    owner = models.ForeignKey('auth.User', related_name='snippets', null=True, blank=True)
+    owner = models.ForeignKey('auth.User', related_name='mands', null=True, blank=True)
 
-    def __unicode__(self):
-        return unicode(str(self.ano_mandado)+'/'+str(self.numero_mandado))#unicode para corrigir o erro que dava no popup inserindo mandado
-                                                                #Error with admin popups: expected a character buffer object
+    def __str__(self):
+        return str(self.ano_mandado)+'/'+str(self.numero_mandado)
+
 '''
     def save(self, request=None, *args, **kwargs):
         self.owner = request.user
@@ -80,16 +83,16 @@ class Ordem(models.Model):#acho que aqui vai ficar bem com revese relations fiel
     tipo = models.CharField(max_length=10,)#criar um p cada com modelos especificos
     modelo = models.ForeignKey('Modelo')
 
-    def __unicode__(self):
-        return unicode(str(self.tipo))
+    def __str__(self):
+        return str(self.tipo)
 
 
 class Oficial(models.Model):
     usuario = models.ForeignKey(User, unique=True)
     telefone = models.DecimalField(max_digits=10, decimal_places=0,)
 
-    def __unicode__(self):
-        return unicode(str(self.usuario.first_name) + ' ' + str(self.usuario.last_name))
+    def __str__(self):
+        return str(self.usuario.first_name) + ' ' + str(self.usuario.last_name)
 
 
 class Atendimento(models.Model):
@@ -98,7 +101,7 @@ class Atendimento(models.Model):
     horario = models.TimeField(verbose_name='das')
     fim = models.TimeField(verbose_name='às')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.dia.strftime("%d/%m/%y") + ' (' + self.horario.strftime('%H:%M') + ' -> ' + self.fim.strftime('%H:%M')+ ')'
 
 
@@ -108,7 +111,7 @@ class Aviso(models.Model):
     aviso = HTMLField(default="Aqui será inserido automaticamente para mandados relacionados!")# modelo_aviso.html
     data_aviso = models.DateField(auto_now=True)#data criação/edição
 
-    def __unicode__(self):
+    def __str__(self):
         a = self.agendamento_set.all()[0]
         return str(self.oficial.usuario)+': '+a.dia.strftime("%d/%m/%y")+' ('+a.horario.strftime('%H:%M')+' -> '+a.fim.strftime('%H:%M')+')'
 
@@ -126,8 +129,8 @@ class Modelo(models.Model):
     nome = models.CharField(max_length=50)
     modelo = HTMLField()
 
-    def __unicode__(self):
-        return unicode(self.nome)
+    def __str__(self):
+        return self.nome
 
 
 '''
@@ -157,11 +160,12 @@ class Bairro(models.Model):
     def __unicode__(self):
         return unicode(self.bairro)
 
-
+'''
 class Telefone(models.Model):
-    ddd = models.DecimalField(default='051', max_digits=3, decimal_places=0, null=True, blank=True)
-    telefone = models.DecimalField(max_digits=8, decimal_places=0, null=True, blank=True)
+    ddd = models.CharField(default='051', max_length=3, null=True, blank=True)
+    telefone = models.CharField(max_length=9, null=True, blank=True)
     mandado = models.ForeignKey(Mandado, blank=True, null=True, related_name='telefone')
+    oficial = models.ForeignKey('Oficial', related_name='lista_telefones', help_text='Se em em branco, preenche automaticamente com o usuario atual.', null=True, blank=True)
 
     def save(self, *args, **kwargs):
         """
@@ -169,9 +173,10 @@ class Telefone(models.Model):
         if self.telefone:
             super(Telefone, self).save(*args, **kwargs)
 
-    def __unicode__(self):
-        return unicode(self.mandado.destinatario + ': ' + str(self.ddd) + '-' + str(self.telefone))
+    def __str__(self):
+        return str(self.mandado.destinatario) + ': ' + str(self.ddd) + '-' + str(self.telefone)
 
+'''
 
 class Status(models.Model):
     mandado = models.ForeignKey(Mandado)

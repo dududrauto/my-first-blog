@@ -2,7 +2,7 @@ __author__ = 'Dudu'
 
 from django.forms import widgets
 from rest_framework import serializers
-from app.models import Mandado, Oficial #, Endereco, Telefone
+from app.models import Mandado, Oficial, Telefone #, Endereco
 from django.contrib.auth.models import User
 
 '''
@@ -12,6 +12,8 @@ dai fica bao!
 
 class MandadoSerializer(serializers.ModelSerializer):
     oficial = serializers.ReadOnlyField(source='oficial.usuario.username')
+    #telefone = serializers.ReadOnlyField(source='telefone[0].telefone')NAO FUNCIONOU
+    #ddd = serializers.ReadOnlyField(source='telefone.ddd')NÃO FUNCIONOU
     class Meta:
         model = Mandado
         fields = (
@@ -28,7 +30,6 @@ class MandadoSerializer(serializers.ModelSerializer):
             'ordem',
             'audiencia',
             'destinatario',
-            'ddd',
             'telefone',
             'cep',
             'estado',
@@ -70,7 +71,7 @@ class EnderecoSerializer(serializers.ModelSerializer):
             'complemento',
         )
 
-
+'''
 class TelefoneSerializer(serializers.ModelSerializer):
     class Meta:
         model = Telefone
@@ -78,5 +79,6 @@ class TelefoneSerializer(serializers.ModelSerializer):
             'id',
             'ddd',
             'telefone',
+            'mandado',
         )
-'''
+
