@@ -1,8 +1,11 @@
 from django.shortcuts import render
 
 # Create your views here.
-from app.models import Mandado, Oficial, Telefone
-from app.serializers import MandadoSerializer, OficialSerializer, TelefoneSerializer
+from app.models import Mandado, Oficial, Telefone, CEP, Endereco, Diligencia, Tipo_Diligencia, Estatus_Cumprimento, \
+    Foto, Audio, Comarca, Vara
+from app.serializers import MandadoSerializer, OficialSerializer, TelefoneSerializer, CepSerializer, EnderecoSerializer,\
+    DiligenciaSerializer, Tipo_DiligenciaSerializer, Estatus_CumprimetoSerializer, FotoSerializer, AudioSerializer, \
+    VaraSerializer, ComarcaSerializer
 from rest_framework import generics
 from django.contrib.auth.models import User
 from rest_framework import permissions
@@ -11,22 +14,98 @@ from django.views.decorators.csrf import csrf_exempt
 import datetime
 
 
-
-"""
-            fazer o serializer e o view do endereco e do telefone dos mandados em aberto do oficial
-
-            ver para utilizar session em swift, se aceita cookies no ios, para o acesso as views do REST
-            para ler o endereco e telefone por exemplo. ou se nao tenho que proceder a consulta dos mandados
-            e depois formar o queryset dos enderecos, telefones e status relacionados ao mandado para
-            preencher o db do aplicativo
+class ComarcaList(generics.ListCreateAPIView):
+    queryset = Comarca.objects.all()
+    serializer_class = ComarcaSerializer
 
 
-"""
+class ComarcaDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Comarca.objects.all()
+    serializer_class = ComarcaSerializer
 
+
+class VaraList(generics.ListCreateAPIView):
+    queryset = Vara.objects.all()
+    serializer_class = VaraSerializer
+
+
+class VaraDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Vara.objects.all()
+    serializer_class = VaraSerializer
+
+
+class AudioList(generics.ListCreateAPIView):
+    queryset = Audio.objects.all()
+    serializer_class = AudioSerializer
+
+
+class AudioDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Audio.objects.all()
+    serializer_class = AudioSerializer
+
+
+class FotoList(generics.ListCreateAPIView):
+    queryset = Foto.objects.all()
+    serializer_class = FotoSerializer
+
+
+class FotoDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Foto.objects.all()
+    serializer_class = FotoSerializer
+
+
+class EstatusCumprimentoList(generics.ListCreateAPIView):
+    queryset = Estatus_Cumprimento.objects.all()
+    serializer_class = Estatus_CumprimetoSerializer
+
+
+class EstatusCumprimentoDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Estatus_Cumprimento.objects.all()
+    serializer_class = Estatus_CumprimetoSerializer
+
+
+class TipoDiligenciaList(generics.ListCreateAPIView):
+    queryset = Diligencia.objects.all()
+    serializer_class = DiligenciaSerializer
+
+
+class TipoDiligenciaDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Tipo_Diligencia.objects.all()
+    serializer_class = Tipo_DiligenciaSerializer
+
+
+class DiligenciaList(generics.ListCreateAPIView):
+    queryset = Diligencia.objects.all()
+    serializer_class = DiligenciaSerializer
+
+
+class DiligenciaDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Diligencia.objects.all()
+    serializer_class = DiligenciaSerializer
+
+
+class EnderecoList(generics.ListCreateAPIView):
+    queryset = Endereco.objects.all()
+    serializer_class = EnderecoSerializer
+
+
+class EnderecoDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Endereco.objects.all()
+    serializer_class = EnderecoSerializer
+
+
+class CepList(generics.ListCreateAPIView):
+    queryset = CEP.objects.all()
+    serializer_class = CepSerializer
+
+
+class CepDetail(generics.RetrieveUpdateDestroyAPIView):#para não deletar trocar a generic por outra
+    queryset = CEP.objects.all()
+    serializer_class = CepSerializer
 
 
 class MandadoList(generics.ListCreateAPIView):
-    queryset = Mandado.objects.all()
+    #queryset = Mandado.objects.all()
     serializer_class = MandadoSerializer
     permission_classes = (permissions.IsAuthenticated,) #.IsAuthenticatedOrReadOnly,)
 
@@ -46,6 +125,7 @@ class MandadoDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = MandadoSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,
                            IsOwnerOrReadOnly,)
+
 
 class TelefoneList(generics.ListCreateAPIView):
     queryset = Telefone.objects.all()

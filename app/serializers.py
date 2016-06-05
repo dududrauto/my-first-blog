@@ -2,18 +2,18 @@ __author__ = 'Dudu'
 
 from django.forms import widgets
 from rest_framework import serializers
-from app.models import Mandado, Oficial, Telefone #, Endereco
+from app.models import Mandado, Oficial, Telefone, Endereco, CEP, Diligencia, Tipo_Diligencia,\
+    Estatus_Cumprimento, Foto, Audio, Vara, Comarca
 from django.contrib.auth.models import User
 
-'''
-criar igual par o oficial para os demais campos que nao forem char
-dai fica bao!
-'''
 
 class MandadoSerializer(serializers.ModelSerializer):
     oficial = serializers.ReadOnlyField(source='oficial.usuario.username')
-    #telefone = serializers.ReadOnlyField(source='telefone[0].telefone')NAO FUNCIONOU
-    #ddd = serializers.ReadOnlyField(source='telefone.ddd')NÃO FUNCIONOU
+    end_str = serializers.CharField(source='endereco', read_only=True)
+    end_latitude = serializers.StringRelatedField(source='endereco.latitude')#, read_only=True)
+    end_longitude = serializers.CharField(source='endereco.longitude', read_only=True)
+    cep = serializers.IntegerField(source='endereco.cep.id', read_only=True)
+
     class Meta:
         model = Mandado
         fields = (
@@ -21,26 +21,27 @@ class MandadoSerializer(serializers.ModelSerializer):
             'comarca',
             'vara',
             'processo',
+            'destinatario',
+            'endereco',
+            'endereco_nao_mora',
+            'end_str',
+            'end_latitude',
+            'end_longitude',
+            'cep',
             'conducao',
-            'ano_mandado',
             'numero_mandado',
-            'n_mandado',
+            'ano_mandado',
+            'codigo_mandado',
             'data',
             'oficial',
             'ordem',
             'audiencia',
-            'destinatario',
-            'telefone',
-            'cep',
-            'estado',
-            'cidade',
-            'bairro',
-            'rua',
-            'numero_rua',
-            'complemento',
-            'latitude',
-            'longitude',
+            'conducao',
             'status_cumprimento',
+            'cumprimento',
+            'cor_urgencia',
+            'rota',
+            'owner',
             )
 
 
@@ -52,26 +53,31 @@ class OficialSerializer(serializers.ModelSerializer):
             'id',
             'usuario',
             'telefone',
+            'email',
+            'cpf',
+            'endereco',
+            'comarca',
             'mandados',
         )
 
 
-
-'''
-class EnderecoSerializer(serializers.ModelSerializer):
-    rua = serializers.StringRelatedField()
-    bairro = serializers.StringRelatedField()
+class CepSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Endereco
+        model = CEP
         fields = (
             'id',
+            'cep',
             'rua',
             'bairro',
-            'numero',
-            'complemento',
+            'cidade',
+            'estado',
+            'pais',
+            'latitude',
+            'longitude',
+            'ajustado_mapa'
         )
 
-'''
+
 class TelefoneSerializer(serializers.ModelSerializer):
     class Meta:
         model = Telefone
@@ -82,3 +88,105 @@ class TelefoneSerializer(serializers.ModelSerializer):
             'mandado',
         )
 
+
+class EnderecoSerializer(serializers.ModelSerializer):
+    cep_str = serializers.CharField(source='cep', read_only=True)
+    class Meta:
+        model = Endereco
+        fields = (
+            'id',
+            'cep',
+            'cep_str',
+            'numero',
+            'latitude',
+            'longitude',
+            'endereco_ERRO',
+            'verificado_em_loco',
+            'complemento',
+        )
+
+
+class DiligenciaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Diligencia
+        fields = (
+            'id',
+            'mandado',
+            'data_diligencia',
+            'hora_diligencia',
+            'tipo_diligencia',
+            'latitude',
+            'longitude',
+            'data_agendamento',
+            'hora_agendamento',
+            'documento',
+            'editar_documento',
+        )
+
+
+class Tipo_DiligenciaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tipo_Diligencia
+        fields = (
+            'id',
+            'nome',
+            'descricao',
+            'modelo_documento',
+            'estatus_cumprimento',
+            'diligencia_positiva',
+            'diligencia_cumprida',
+            'endereco_ERRO',
+            'diligencia_nao_mora',
+            'verificado_em_loco',
+            'diligencia_externa',
+            'diligencia_coletiva',
+        )
+
+
+class Estatus_CumprimetoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Estatus_Cumprimento
+        fields = (
+            'estatus_cumprimento',
+            'descricao',
+            'flag_cumprimento',
+        )
+
+
+class ComarcaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comarca
+        fields = (
+            'nome',
+            'cod_comarca',
+            'endereco',
+        )
+
+
+class VaraSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Vara
+        fields = (
+            'nome',
+            'comarca',
+        )
+
+
+class FotoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Foto
+        fields = (
+            'diligencia',
+            'descricao',
+            'foto',
+        )
+
+
+class AudioSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Audio
+        fields = (
+            'diligencia',
+            'descricao',
+            'audio',
+        )

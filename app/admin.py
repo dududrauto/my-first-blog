@@ -1,6 +1,6 @@
 # coding=utf-8
 from django.contrib import admin
-from app.models import Mandado, Oficial, Aviso, Atendimento, Ordem, Modelo, Telefone
+from app.models import *#Mandado, Oficial, Endereco, CEP, Ordem, Modelo_Documento, Telefone
 import datetime
 from django.template import Context, Template, loader
 
@@ -9,15 +9,6 @@ class TelefoneInline(admin.TabularInline):
     model = Telefone
     extra = 1
 
-'''
-class EnderecoInline(admin.TabularInline):
-    model = Endereco
-    extra = 1
-
-'''
-class AtendimentoInline(admin.TabularInline):
-    model = Atendimento
-    extra = 1
 
 def export_aviso(modeladmin, request, queryset):
     f=open('testeefile.csv', 'w')
@@ -30,57 +21,52 @@ def export_aviso(modeladmin, request, queryset):
 export_aviso.short_description = "marque mandados para mala direta"
 
 def make_av(modeladmin, request, queryset):
-    queryset.update(status_cumprimento='AV')
+    queryset.update(status_cumprimento=1)
 make_av.short_description = "marque os mandados para avisados"
 
 def make_dv(modeladmin, request, queryset):
-    queryset.update(status_cumprimento='DV')
+    queryset.update(status_cumprimento=2)
 make_dv.short_description = "marque os mandados para devolvidos"
 
 def make_URG(modeladmin, request, queryset):
-    queryset.update(status_cumprimento='rd')
+    queryset.update(status_cumprimento=3)
 make_URG.short_description = "marque os mandados para Urgentes"
 
 def make_N(modeladmin, request, queryset):
-    queryset.update(status_cumprimento='pu')
+    queryset.update(status_cumprimento=4)
 make_N.short_description = "marque os mandados para Normal"
 
 def make_con(modeladmin, request, queryset):
-    queryset.update(status_cumprimento='gr')
+    queryset.update(status_cumprimento=5)
 make_con.short_description = "marque os mandados para com Conducao"
 
 def make_cert(modeladmin, request, queryset):
-    queryset.update(status_cumprimento='CE')
+    queryset.update(status_cumprimento=6)
 make_cert.short_description = "marque os mandados para Certificar"
 
 def make_OfX(modeladmin, request, queryset):
     queryset.update(oficial=1)#"2 cristian" "1 drauto" "3 eu mesmo" "4 kleber"
 make_OfX.short_description = "transfere para oficial x, provisorio"##provisorio so p nao carregar no ifone...
 
+
 class MandadoAdmin(admin.ModelAdmin):
 
-    list_display = ['n_mandado', 'data', 'audiencia', 'destinatario', 'rua', 'bairro', 'ordem', 'conducao', 'status_cumprimento']
-    ordering = ['n_mandado']
-    search_fields = ['numero_mandado', 'destinatario', 'rua']
-    list_editable = ['conducao', 'status_cumprimento']#['status_cumprimento', 'conducao']
-    list_filter = ['audiencia', 'conducao', 'status_cumprimento', 'data']#
+    list_display = ['codigo_mandado', 'data', 'audiencia', 'destinatario', 'endereco', 'ordem', 'conducao', 'status_cumprimento']
+    ordering = ['numero_mandado']
+    search_fields = ['numero_mandado', 'destinatario']
+    list_editable = ['conducao', 'status_cumprimento']
+    list_filter = ['audiencia', 'conducao', 'status_cumprimento', 'data']
     list_max_show_all = 1000
     fieldsets = (
          (None, {#1
                  'classes': ('wide',),
-                 'fields': (('n_mandado', 'destinatario'),
-                            ('cep', 'numero_rua'),
+                 'fields': (('numero_mandado', 'destinatario', 'endereco'),
                             ('audiencia', 'status_cumprimento', 'conducao', 'ordem'),
-                            )# 'aviso') criar em seguida
-         }),
-         ('Campos de Endereço', {
-             'classes': ('wide',),#ou collapse, melhor mostrnado para conferir
-             'fields': (('estado', 'cidade', 'rua', 'bairro', 'complemento'),)# ('ddd', 'telefone',))
-         }),
+                            )}),
          ('Campos Complementares', {
              'classes': ('collapse',),
-             'fields': ('processo', 'comarca', 'vara', 'ano_mandado',
-                        'data', 'oficial', 'latitude', 'longitude', )#'status_cumprimento', 'owner')
+             'fields': ('processo', 'comarca', 'vara', 'ano_mandado', 'codigo_mandado',
+                        'data', 'oficial', 'status_cumprimento', 'owner')
          }),
     )
 
@@ -91,21 +77,13 @@ class MandadoAdmin(admin.ModelAdmin):
 
     actions = [export_aviso, make_av, make_dv, make_N, make_URG, make_con, make_cert, make_OfX]
 
-    inlines = [TelefoneInline,] #EnderecoInline,
+    inlines = [TelefoneInline,]
 
-    '''
-    class Media:
-        js = (
-            '//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js', # jquery
-            'js/myscript.js',       # project static folder
-            'app/js/myscript.js',   # app static folder
-        )
-    '''
     def save_model(self, request, obj, form, change):
         if getattr(obj, 'oficial', None) is None:
             obj.oficial = Oficial.objects.get(usuario=request.user)
         obj.owner = request.user
-        obj.numero_mandado = str(obj.n_mandado)
+        obj.codigo_mandado = str(obj.oficial.comarca.cod_comarca)+'/'+str(obj.ano_mandado)+'/'+str(obj.numero_mandado)
         obj.save()
 
     def queryset(self, request):
@@ -117,7 +95,13 @@ class MandadoAdmin(admin.ModelAdmin):
 
         return qs.filter(oficial__usuario=request.user)
 
+class CEPAdmin(admin.ModelAdmin):
+    class Media:
+        js = (
+            'admin/js/cep.js',
+        )
 
+'''
 class AvisoAdmin(admin.ModelAdmin):
 #    inlines = [AtendimentoInline]
 
@@ -140,7 +124,7 @@ class AvisoAdmin(admin.ModelAdmin):
                 av.aviso = html.replace("\n", "")
                 av.save()
         return qs
-
+'''
 '''
   fields = (
             'id',
@@ -172,17 +156,18 @@ class AvisoAdmin(admin.ModelAdmin):
 
 
 # Register your models here.
-#admin.site.register(Endereco)
-#admin.site.register(Rua)
-#admin.site.register(Bairro)
-admin.site.register(Atendimento)
 admin.site.register(Mandado, MandadoAdmin)
-admin.site.register(Telefone)
+admin.site.register(Endereco)
+admin.site.register(CEP, CEPAdmin)
+admin.site.register(Estatus_Cumprimento)
 admin.site.register(Oficial)
 admin.site.register(Ordem)
-admin.site.register(Aviso, AvisoAdmin)
-admin.site.register(Modelo)
-#admin.site.register(Telefone)
-#admin.site.register(models.Orden)
-#admin.site.register(models.Pessoa)
-#admin.site.register(models.Rua)
+admin.site.register(Telefone)
+admin.site.register(Modelo_Documento)
+admin.site.register(Diligencia)
+admin.site.register(Tipo_Diligencia)
+admin.site.register(Comarca)
+admin.site.register(Vara)
+admin.site.register(Foto)
+admin.site.register(Audio)
+

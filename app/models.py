@@ -4,68 +4,55 @@ from django.contrib.auth.models import User
 from tinymce.models import HTMLField
 import datetime
 
+
 # Create your models here.
 class Mandado(models.Model):
+    #                           DADOS DA ORIGEM
+    comarca = models.ForeignKey('Comarca', null=True, blank=True)
+    vara = models.ForeignKey('Vara', blank=True, null=True)
+    processo = models.CharField(blank=True, null=True, max_length=35)
+    #                           DADOS DE DESTINATARIO
+    destinatario = models.CharField(max_length=100)
+    endereco = models.ForeignKey('Endereco', blank=True, null=True)
+    endereco_nao_mora = models.BooleanField(default=False)   #Se o destinatário não foi encontrado no endereço 1,
+                                                            #se ainda não verificado ou positivo 0
 
-    #                           DADOS COMARCA/VARA
-    comarca = models.DecimalField(max_digits=3, decimal_places=0, default="003")
-    vara = models.CharField(max_length=20, blank=True, null=True)
-
-    #                           DADOS PROCESSO
-    processo = models.DecimalField(blank=True, null=True, max_digits=20, decimal_places=0)
+    #                           DADOS MANDADO
+    numero_mandado = models.IntegerField(verbose_name="Número do Mandado", unique=True)
+    ano_mandado = models.CharField(max_length=4, default=str(datetime.date.today().year))
+    codigo_mandado = models.CharField(max_length=20, null=True, blank=True)
+    data = models.DateField(default=datetime.date.today(), help_text="Data de recebimento.")
+    oficial = models.ForeignKey('Oficial', related_name='mandados',
+                                help_text='Se em em branco, preenche automaticamente com o usuario atual.', null=True,
+                                blank=True)
+    ordem = models.ForeignKey('Ordem', default=2, null=True, blank=True,
+                              help_text='Citacao, Intimacao, Penhora, Avaliacao, Busca e Ap, etc...')
+    audiencia = models.DateField(blank=True, null=True)
     conducao = models.CharField(verbose_name='Condução', max_length=4, blank=True, null=True, default='AJG',
                                 choices=(('AJG', 'AJG'),
                                          ('OK', 'Vinculada'),
                                          ('PAGA', 'Não Vinculada'),
                                          ('NO', 'Não Paga'),))
 
-    #                           DADOS MANDADO
-    ano_mandado = models.CharField(max_length=4, default=str(datetime.date.today().year))
-    numero_mandado = models.CharField(max_length=8)#models.IntegerField()#
-    n_mandado = models.IntegerField(verbose_name="Número do Mandado", unique=True)#
-    data = models.DateField(default=datetime.date.today(), help_text="Data de recebimento.")
-    oficial = models.ForeignKey('Oficial', related_name='mandados', help_text='Se em em branco, preenche automaticamente com o usuario atual.', null=True, blank=True)
-    ordem = models.ForeignKey('Ordem', default=2, help_text='Citacao, Intimacao, Penhora, Avaliacao, Busca e Ap, etc...')
-    audiencia = models.DateField(blank=True, null=True)
 
 
-    #                           DADOS DESTINATARIO
-    destinatario = models.CharField(max_length=100)
 
-    #alteração DB em 17/05/2016
-    #ddd = models.CharField(max_length=3, default='051')
-    #telefone = models.CharField(max_length=9, blank=True, null=True)
-
-    cep = models.CharField(max_length=9, null=True, blank=True, help_text='Alternativamente, preencha "Campos de Endereço".')
-    pais = models.CharField(max_length=50, default="Brasil")
-    estado = models.CharField(max_length=50, default= "Rio Grande do Sul")
-    cidade = models.CharField(max_length=50)
-    bairro = models.CharField(max_length=50, null=True, blank=True)
-    rua = models.CharField(max_length=100, null=True, blank=True)
-    numero_rua = models.CharField(verbose_name='Número da Casa', max_length=6)
-    complemento = models.CharField(max_length=20, null=True, blank=True) #####   AUMENTAR!!!!!
-    latitude = models.CharField(max_length=30, blank=True, null=True)
-    longitude = models.CharField(max_length=30, blank=True, null=True)
+    # alteração DB em 17/05/2016
+    # ddd = models.CharField(max_length=3, default='051')
+    # telefone = models.CharField(max_length=9, blank=True, null=True)
 
     #                               DADOS CUMPRIMENTO
-    status_cumprimento = models.CharField(max_length=2,
-                                          default='pu',
-                                          choices=(('rd', 'Urgente'), ('gr', '$'), ('pu', 'Normal'),
-                                                   ('AV', 'Avidado'), ('DV', 'Devolvido'), ('CE', "Certificar"), ),
-                                          verbose_name='Status')
-
-
-    '''  choices=(('RC', 'Recebido'),
-                                                   ('AV', 'Avisado'),
-                                                   ('CP', 'Cumprido Positivo'),
-                                                   ('NN', 'Negativa Numero'),
-                                                   ('NE', 'Negativa de Endereço'),
-                                                   ('CE', 'Contrafé Endereço'),
-                                                   ('NC', 'Não Cumprido')'''
+    status_cumprimento = models.ForeignKey('Estatus_Cumprimento', null=True, blank=True)  # inserir 1 Recebido
+    cumprimento = models.BooleanField(default=True)  # 1_pendente, 0_cumprido
+    cor_urgencia = models.CharField(max_length=2, choices=(('1', 'vermelho'),
+                                                           ('2', 'amarelo'),
+                                                           ('3', 'verde')), default='1')
+    rota = models.CharField(max_length=3, default='0')
     owner = models.ForeignKey('auth.User', related_name='mands', null=True, blank=True)
 
     def __str__(self):
-        return str(self.ano_mandado)+'/'+str(self.numero_mandado)
+        return str(self.ano_mandado) + '/' + str(self.numero_mandado)
+
 
 '''
     def save(self, request=None, *args, **kwargs):
@@ -74,98 +61,75 @@ class Mandado(models.Model):
 '''
 
 
-
-
-
-class Ordem(models.Model):#acho que aqui vai ficar bem com revese relations field, um para muitos, ou seja foreignkey aqui para mandados
-    #dai os tipos são cada um... (citação, intimação, penhora, busca e apreensão...) podendo assim combinar o que for...
-    #não sei dai no serializers como que vai ficar..., se vou usar igual para o usuário chamando related field, set, ou outra forma
-    tipo = models.CharField(max_length=10,)#criar um p cada com modelos especificos
-    modelo = models.ForeignKey('Modelo')
+class Endereco(models.Model):
+    cep = models.ForeignKey('CEP', null=True, blank=True)
+    numero = models.CharField(verbose_name='Número da Casa', max_length=6)
+    latitude = models.CharField(max_length=30, blank=True, null=True)
+    longitude = models.CharField(max_length=30, blank=True, null=True)
+    endereco_ERRO = models.BooleanField(default=False)
+    verificado_em_loco = models.BooleanField(default=False)
+    complemento = models.TextField(null=True, blank=True)
 
     def __str__(self):
-        return str(self.tipo)
+
+        return str(self.cep)+', '+str(self.numero)
+
+
+class CEP(models.Model):
+    cep = models.CharField(max_length=9, null=True, blank=True,
+                           help_text='Alternativamente, preencha "Campos de Endereço".',)
+    rua = models.CharField(max_length=100, null=True, blank=True)
+    bairro = models.CharField(max_length=50, null=True, blank=True)
+    cidade = models.CharField(max_length=50)
+    estado = models.CharField(max_length=50, default="Rio Grande do Sul")
+    pais = models.CharField(max_length=50, default="Brasil")
+    latitude = models.CharField(max_length=30, blank=True, null=True)
+    longitude = models.CharField(max_length=30, blank=True, null=True)
+    ajustado_mapa = models.BooleanField(default=False)
+
+    def __str__(self):
+        return str(self.estado)+', '+str(self.cidade)+', '+str(self.rua).split(' - ')[0]
+
+
+class Estatus_Cumprimento(models.Model):
+    estatus_cumprimento = models.CharField(max_length=20)
+    descricao = models.TextField()
+    flag_cumprimento = models.BooleanField()
+
+    def __str__(self):
+        return str(self.estatus_cumprimento)
 
 
 class Oficial(models.Model):
     usuario = models.ForeignKey(User, unique=True)
-    telefone = models.DecimalField(max_digits=10, decimal_places=0,)
+    telefone = models.DecimalField(max_digits=10, decimal_places=0, )
+    email = models.EmailField(null=True, blank=True)
+    cpf = models.CharField(max_length=11, default='12345678901')
+    endereco = models.ForeignKey(Endereco, null=True, blank=True)
+    comarca = models.ForeignKey('Comarca', null=True, blank=True)
 
     def __str__(self):
         return str(self.usuario.first_name) + ' ' + str(self.usuario.last_name)
 
 
-class Atendimento(models.Model):
-    oficial = models.ForeignKey('Oficial')
-    dia = models.DateField()
-    horario = models.TimeField(verbose_name='das')
-    fim = models.TimeField(verbose_name='às')
+class Ordem(models.Model):
+    ordem = models.CharField(max_length=50)
+    descricao = models.TextField(null=True, blank=True)
+    diligencia_positiva = models.ForeignKey('Tipo_Diligencia', null=True, blank=True)
 
     def __str__(self):
-        return self.dia.strftime("%d/%m/%y") + ' (' + self.horario.strftime('%H:%M') + ' -> ' + self.fim.strftime('%H:%M')+ ')'
+        return str(self.ordem)
 
 
-class Aviso(models.Model):
-    oficial = models.ForeignKey('Oficial')
-    atendimento = models.ForeignKey('Atendimento')
-    aviso = HTMLField(default="Aqui será inserido automaticamente para mandados relacionados!")# modelo_aviso.html
-    data_aviso = models.DateField(auto_now=True)#data criação/edição
-
-    def __str__(self):
-        a = self.agendamento_set.all()[0]
-        return str(self.oficial.usuario)+': '+a.dia.strftime("%d/%m/%y")+' ('+a.horario.strftime('%H:%M')+' -> '+a.fim.strftime('%H:%M')+')'
-
-
-class Documento(models.Model):
-    oficial = models.ForeignKey('Oficial')
-    mandado = models.ForeignKey(Mandado)
-    documento = HTMLField()
-    atendimento = models.ForeignKey('Atendimento', blank=True, null=True)
-    modelo = models.ForeignKey('Modelo')
-    data = models.DateField(default=datetime.datetime.now())
-
-
-class Modelo(models.Model):
-    nome = models.CharField(max_length=50)
-    modelo = HTMLField()
-
-    def __str__(self):
-        return self.nome
-
-
-'''
-class Endereco(models.Model):
-    mandado = models.ForeignKey('Mandado', related_name='endereco')
-    rua = models.ForeignKey("Rua")
-    bairro = models.ForeignKey("Bairro", blank=True, null=True)
-    numero = models.IntegerField()
-    complemento = models.CharField(max_length=100, blank=True, null=True)
-
-    def __unicode__(self):
-        return unicode(str(self.rua) + ", " + str(self.bairro) + ", " + str(self.numero))
-
-
-class Rua(models.Model):
-    rua = models.CharField(max_length=30)
-    min_num = models.IntegerField(blank=True, null=True)
-    max_num = models.IntegerField(blank=True, null=True)
-
-    def __unicode__(self):
-        return unicode(self.rua)
-
-
-class Bairro(models.Model):
-    bairro = models.CharField(max_length=30)
-
-    def __unicode__(self):
-        return unicode(self.bairro)
-
-'''
 class Telefone(models.Model):
     ddd = models.CharField(default='051', max_length=3, null=True, blank=True)
     telefone = models.CharField(max_length=9, null=True, blank=True)
+    contato = models.CharField(max_length=50, blank=True, null=True)
     mandado = models.ForeignKey(Mandado, blank=True, null=True, related_name='telefone')
-    oficial = models.ForeignKey('Oficial', related_name='lista_telefones', help_text='Se em em branco, preenche automaticamente com o usuario atual.', null=True, blank=True)
+    endereco = models.ForeignKey(Endereco, blank=True, null=True, related_name='telefone')
+    oficial = models.ForeignKey('Oficial', related_name='lista_telefones',
+                                help_text='Se em em branco, preenche automaticamente com o usuario atual.', null=True,
+                                blank=True)
 
     def save(self, *args, **kwargs):
         """
@@ -176,25 +140,80 @@ class Telefone(models.Model):
     def __str__(self):
         return str(self.mandado.destinatario) + ': ' + str(self.ddd) + '-' + str(self.telefone)
 
-'''
 
-class Status(models.Model):
+class Modelo_Documento(models.Model):
+    nome = models.CharField(max_length=50)
+    modelo = HTMLField()
+    descricao = models.TextField()
+    editar_sempre = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.nome
+
+
+class Diligencia(models.Model):
     mandado = models.ForeignKey(Mandado)
-    oficial = models.ForeignKey('Oficial')
-    status = models.CharField(max_length=2, choices=(('CP', 'Cumprido Positivo'),
-                                                     ('CN', 'Cumprido Negativo'),
-                                                     ('NC', 'Devolver a pedido'),
-                                                     ('PC', 'Parcialmente Cumprido'),
-                                                     ('MR', 'Mandado Recebido'),
-                                                     ('RD', 'Mandado Redistribuido'),
-                                                     ('DN', 'Diligencia Negativa'),
-                                                     ('AV', 'Mandado Avisado'),
-                                                     ('AG', 'Cumprimento Agendado'),))
+    data_diligencia = models.DateField(auto_now_add=True)
+    hora_diligencia = models.TimeField(auto_now_add=True)
+    tipo_diligencia = models.ForeignKey("Tipo_Diligencia", blank=True, null=True)
+    latitude = models.CharField(max_length=30, blank=True, null=True)
+    longitude = models.CharField(max_length=30, blank=True, null=True)
+    data_agendamento = models.DateField(blank=True, null=True)
+    hora_agendamento = models.TimeField(blank=True, null=True)
+    documento = HTMLField(blank=True, null=True)
+    editar_documento = models.BooleanField(default=False)
+
+    def __str__(self):
+        return str(self.mandado)+' '+str(self.tipo_diligencia)
 
 
-    def __unicode__(self):
-        return unicode(str(self.oficial.usuario) + ':' + str(self.mandado.numero)+' -> '+str(self.status))
+class Tipo_Diligencia(models.Model):
+    nome = models.CharField(max_length=50)
+    descricao = models.TextField()
+    modelo_documento = models.ForeignKey(Modelo_Documento, null=True, blank=True)
+    estatus_cumprimento = models.ForeignKey(Estatus_Cumprimento)
+    diligencia_positiva = models.BooleanField(default=False)
+    diligencia_cumprida = models.BooleanField(default=False)
+    endereco_ERRO = models.BooleanField(default=False)
+    diligencia_nao_mora = models.BooleanField(default=False)
+    verificado_em_loco = models.BooleanField(default=False)
+    diligencia_externa = models.BooleanField(default=False)
+    diligencia_coletiva = models.BooleanField(default=False)
+
+    def __str__(self):
+        return str(self.nome)
 
 
+class Comarca(models.Model):
+    nome = models.CharField(max_length=50)
+    cod_comarca = models.CharField(max_length=5)
+    endereco = models.ForeignKey(Endereco, null=True, blank=True)
 
-'''
+    def __str__(self):
+        return str(self.nome)
+
+
+class Vara(models.Model):
+    nome = models.CharField(max_length=50)
+    comarca = models.ForeignKey(Comarca, null=True, blank=True)
+
+    def __str__(self):
+        return str(self.nome)
+
+
+class Foto(models.Model):
+    diligencia = models.ForeignKey(Diligencia, null=True, blank=True)
+    foto = models.ImageField()
+    descricao = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return 'Foto'+' '+str(self.diligencia)
+
+
+class Audio(models.Model):
+    diligencia = models.ForeignKey(Diligencia, null=True, blank=True)
+    audio = models.BinaryField()
+    descricao = models.TextField()
+
+    def __str__(self):
+        return 'Audio'+' '+str(self.diligencia)
