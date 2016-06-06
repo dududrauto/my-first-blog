@@ -2,6 +2,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from tinymce.models import HTMLField
+import django
 import datetime
 
 
@@ -21,7 +22,7 @@ class Mandado(models.Model):
     numero_mandado = models.IntegerField(verbose_name="Número do Mandado", unique=True)
     ano_mandado = models.CharField(max_length=4, default=str(datetime.date.today().year))
     codigo_mandado = models.CharField(max_length=20, null=True, blank=True)
-    data = models.DateField(default=datetime.date.today(), help_text="Data de recebimento.")
+    data = models.DateField(default=django.utils.timezone.now(), help_text="Data de recebimento.")
     oficial = models.ForeignKey('Oficial', related_name='mandados',
                                 help_text='Se em em branco, preenche automaticamente com o usuario atual.', null=True,
                                 blank=True)
