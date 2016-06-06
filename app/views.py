@@ -1,9 +1,9 @@
 from django.shortcuts import render
 
 # Create your views here.
-from app.models import Mandado, Oficial, Telefone, CEP, Endereco, Diligencia, Tipo_Diligencia, Estatus_Cumprimento, \
+from app.models import Mandado, Oficial, Telefone, Diligencia, Tipo_Diligencia, Estatus_Cumprimento, \
     Foto, Audio, Comarca, Vara
-from app.serializers import MandadoSerializer, OficialSerializer, TelefoneSerializer, CepSerializer, EnderecoSerializer,\
+from app.serializers import MandadoSerializer, OficialSerializer, TelefoneSerializer,\
     DiligenciaSerializer, Tipo_DiligenciaSerializer, Estatus_CumprimetoSerializer, FotoSerializer, AudioSerializer, \
     VaraSerializer, ComarcaSerializer
 from rest_framework import generics
@@ -83,7 +83,7 @@ class DiligenciaDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Diligencia.objects.all()
     serializer_class = DiligenciaSerializer
 
-
+'''
 class EnderecoList(generics.ListCreateAPIView):
     queryset = Endereco.objects.all()
     serializer_class = EnderecoSerializer
@@ -102,7 +102,7 @@ class CepList(generics.ListCreateAPIView):
 class CepDetail(generics.RetrieveUpdateDestroyAPIView):#para não deletar trocar a generic por outra
     queryset = CEP.objects.all()
     serializer_class = CepSerializer
-
+'''
 
 class MandadoList(generics.ListCreateAPIView):
     #queryset = Mandado.objects.all()

@@ -2,46 +2,53 @@ __author__ = 'Dudu'
 
 from django.forms import widgets
 from rest_framework import serializers
-from app.models import Mandado, Oficial, Telefone, Endereco, CEP, Diligencia, Tipo_Diligencia,\
+from app.models import Mandado, Oficial, Telefone, Diligencia, Tipo_Diligencia,\
     Estatus_Cumprimento, Foto, Audio, Vara, Comarca
 from django.contrib.auth.models import User
 
 
 class MandadoSerializer(serializers.ModelSerializer):
     oficial = serializers.ReadOnlyField(source='oficial.usuario.username')
-    end_str = serializers.CharField(source='endereco', read_only=True)
-    end_latitude = serializers.StringRelatedField(source='endereco.latitude')#, read_only=True)
-    end_longitude = serializers.CharField(source='endereco.longitude', read_only=True)
-    cep = serializers.IntegerField(source='endereco.cep.id', read_only=True)
 
     class Meta:
         model = Mandado
         fields = (
             'id',
-            'comarca',
-            'vara',
-            'processo',
-            'destinatario',
-            'endereco',
-            'endereco_nao_mora',
-            'end_str',
-            'end_latitude',
-            'end_longitude',
-            'cep',
-            'conducao',
-            'numero_mandado',
-            'ano_mandado',
-            'codigo_mandado',
-            'data',
-            'oficial',
-            'ordem',
-            'audiencia',
-            'conducao',
-            'status_cumprimento',
-            'cumprimento',
-            'cor_urgencia',
-            'rota',
-            'owner',
+            'comarca',#
+            'vara',#
+            'processo',#
+            'destinatario',#
+            'cep',#
+            'rua',#
+            'numero',#
+            'bairro',#
+            'cidade',#
+            'estado',#
+            'pais',#
+            'latitude',#
+            'longitude',#
+            'endereco_ERRO',#
+            'verificado_em_loco',#
+            'complemento',#
+            'endereco_nao_mora',#
+            'endereco_ERRO',#
+            'verificado_em_loco',#
+            'complemento',#
+            'ajustado_mapa',#
+            'endereco_nao_mora',#
+            'numero_mandado',#
+            'ano_mandado',#
+            'codigo_mandado',#
+            'data',#
+            'oficial',#
+            'ordem',#
+            'audiencia',#
+            'conducao',#
+            'status_cumprimento',#
+            'cumprimento',#
+            'cor_urgencia',#
+            'rota',#
+            'owner',#
             )
 
 
@@ -60,7 +67,7 @@ class OficialSerializer(serializers.ModelSerializer):
             'mandados',
         )
 
-
+'''
 class CepSerializer(serializers.ModelSerializer):
     class Meta:
         model = CEP
@@ -77,7 +84,7 @@ class CepSerializer(serializers.ModelSerializer):
             'ajustado_mapa'
         )
 
-
+'''
 class TelefoneSerializer(serializers.ModelSerializer):
     class Meta:
         model = Telefone
@@ -88,7 +95,7 @@ class TelefoneSerializer(serializers.ModelSerializer):
             'mandado',
         )
 
-
+'''
 class EnderecoSerializer(serializers.ModelSerializer):
     cep_str = serializers.CharField(source='cep', read_only=True)
     class Meta:
@@ -104,7 +111,7 @@ class EnderecoSerializer(serializers.ModelSerializer):
             'verificado_em_loco',
             'complemento',
         )
-
+'''
 
 class DiligenciaSerializer(serializers.ModelSerializer):
     class Meta:

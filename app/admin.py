@@ -51,7 +51,7 @@ make_OfX.short_description = "transfere para oficial x, provisorio"##provisorio 
 
 class MandadoAdmin(admin.ModelAdmin):
 
-    list_display = ['codigo_mandado', 'data', 'audiencia', 'destinatario', 'endereco', 'ordem', 'conducao', 'status_cumprimento']
+    list_display = ['codigo_mandado', 'data', 'audiencia', 'destinatario', 'cidade', 'rua', 'ordem', 'conducao', 'status_cumprimento']
     ordering = ['numero_mandado']
     search_fields = ['numero_mandado', 'destinatario']
     list_editable = ['conducao', 'status_cumprimento']
@@ -60,13 +60,17 @@ class MandadoAdmin(admin.ModelAdmin):
     fieldsets = (
          (None, {#1
                  'classes': ('wide',),
-                 'fields': (('numero_mandado', 'destinatario', 'endereco'),
+                 'fields': (('numero_mandado', 'destinatario', ),
+                            ('cep', 'cidade', 'bairro',),
+                            ('rua', 'numero'), 'complemento',
                             ('audiencia', 'status_cumprimento', 'conducao', 'ordem'),
                             )}),
          ('Campos Complementares', {
              'classes': ('collapse',),
-             'fields': ('processo', 'comarca', 'vara', 'ano_mandado', 'codigo_mandado',
-                        'data', 'oficial', 'status_cumprimento', 'owner')
+             'fields': (('processo', 'comarca', 'vara'),('ano_mandado', 'codigo_mandado'), ('estado', 'pais'),
+                        ('cor_urgencia', 'rota'),
+                        ('latitude', 'longitude'), ('ajustado_mapa', 'verificado_em_loco', 'endereco_ERRO', 'endereco_nao_mora'),
+                        ('data', 'oficial', 'owner'))
          }),
     )
 
@@ -84,6 +88,8 @@ class MandadoAdmin(admin.ModelAdmin):
             obj.oficial = Oficial.objects.get(usuario=request.user)
         obj.owner = request.user
         obj.codigo_mandado = str(obj.oficial.comarca.cod_comarca)+'/'+str(obj.ano_mandado)+'/'+str(obj.numero_mandado)
+        rua = obj.rua.split(' - ')[0]
+        obj.rua = rua
         obj.save()
 
     def queryset(self, request):
@@ -157,8 +163,8 @@ class AvisoAdmin(admin.ModelAdmin):
 
 # Register your models here.
 admin.site.register(Mandado, MandadoAdmin)
-admin.site.register(Endereco)
-admin.site.register(CEP, CEPAdmin)
+#admin.site.register(Endereco)
+#admin.site.register(CEP, CEPAdmin)
 admin.site.register(Estatus_Cumprimento)
 admin.site.register(Oficial)
 admin.site.register(Ordem)
