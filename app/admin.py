@@ -92,9 +92,8 @@ class MandadoAdmin(admin.ModelAdmin):
         obj.rua = rua
         obj.save()
 
-    def queryset(self, request):
-        qs = super(MandadoAdmin, self).queryset(request)
-
+    def get_queryset(self, request):
+        qs = super(MandadoAdmin, self).get_queryset(request)
         # Se for superusuario, mostre todos os comentarios
         if request.user.is_superuser:
             return qs
@@ -174,6 +173,6 @@ admin.site.register(Diligencia)
 admin.site.register(Tipo_Diligencia)
 admin.site.register(Comarca)
 admin.site.register(Vara)
-admin.site.register(Foto)
-admin.site.register(Audio)
+#admin.site.register(Foto)
+#admin.site.register(Audio)
 

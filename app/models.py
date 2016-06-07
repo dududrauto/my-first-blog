@@ -10,6 +10,10 @@ import datetime
 
 
 class Mandado(models.Model):
+    class Meta:
+        verbose_name = 'Mandado'
+        verbose_name_plural = 'Mandados'
+
     #                           DADOS DA ORIGEM
     comarca = models.ForeignKey('Comarca', null=True, blank=True)
     vara = models.ForeignKey('Vara', blank=True, null=True)
@@ -167,6 +171,10 @@ class Estatus_Cumprimento(models.Model):
 
 
 class Oficial(models.Model):
+    class Meta:
+        verbose_name = 'Oficial'
+        verbose_name_plural = 'Oficiais'
+
     usuario = models.ForeignKey(User, unique=True)
     telefone = models.DecimalField(max_digits=10, decimal_places=0, )
     email = models.EmailField(null=True, blank=True)

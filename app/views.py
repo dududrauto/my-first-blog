@@ -12,6 +12,24 @@ from rest_framework import permissions
 from app.permissions import IsOwnerOrReadOnly
 from django.views.decorators.csrf import csrf_exempt
 import datetime
+from app.printing import MyPrint
+from io import BytesIO
+from django.http import HttpResponse
+
+def print_users(request):
+    '''
+    Create the HttpResponse object with the appropriate PDF headers.
+    '''
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="myUsers.pdf"'
+
+    buffer = BytesIO()
+
+    report = MyPrint(buffer, 'Letter')
+    pdf = report.print_users()
+
+    response.write(pdf)
+    return response
 
 
 class ComarcaList(generics.ListCreateAPIView):
