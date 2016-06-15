@@ -9,6 +9,7 @@ from reportlab.platypus import PageBreak
 from html.parser import HTMLParser
 from app.models import Modelo_Documento
 from django import template
+import html
 
 class MyHTMLParser(HTMLParser):
     def __init__(self):
@@ -149,10 +150,10 @@ class MyPrint:
         for mandado in mandados:
             c = template.Context({'mandado':mandado})
             t = template.Template(av.modelo)
-            html = t.render(c)
+            modelo_html = t.render(c)
 
             parser = MyHTMLParser()
-            parser.feed(html)
+            parser.feed(html.unescape(modelo_html))
             documento = parser.list_data
             #elements.append(Paragraph('My User Names', styles['Heading1'],))
             for i, user in enumerate(documento):
