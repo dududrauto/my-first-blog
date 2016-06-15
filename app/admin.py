@@ -46,7 +46,7 @@ def make_av(modeladmin, request, queryset):
     '''
     response.write(pdf)
     return response
-make_av.short_description = "marque os mandados para avisados"
+make_av.short_description = "fazer avisos para os mandados"
 
 def make_dv(modeladmin, request, queryset):
     queryset.update(status_cumprimento=2)
@@ -103,7 +103,7 @@ class MandadoAdmin(admin.ModelAdmin):
             'admin/js/cep.js',
         )
 
-    actions = [export_aviso, make_av, make_dv, make_N, make_URG, make_con, make_cert, make_OfX]
+    actions = [make_av,]#[export_aviso, make_av, make_dv, make_N, make_URG, make_con, make_cert, make_OfX]
 
     inlines = [TelefoneInline,]
 
