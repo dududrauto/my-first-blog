@@ -16,18 +16,26 @@ from app.printing import MyPrint
 from io import BytesIO
 from django.http import HttpResponse
 
+
 def print_users(request):
     '''
-    Create the HttpResponse object with the appropriate PDF headers.
+    Gera o pdf de varias diligencias, chamando o metodo
     '''
     response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename="myUsers.pdf"'
+    response['Content-Disposition'] = 'attachment; filename="myUsers.pdf"'#se comentar essa linha o arquivo abre no navegador
 
     buffer = BytesIO()
 
     report = MyPrint(buffer, 'Letter')
-    pdf = report.print_users()
+    d = Diligencia.objects.all()#envia uma lista de diligencias para a função print_documentos
+    pdf = report.print_documentos(d)
 
+    '''
+
+    d = Diligencia.objects.all()[0]#envia uma diligencia para a função print_documento
+    pdf = report.print_documentos(d)
+
+    '''
     response.write(pdf)
     return response
 

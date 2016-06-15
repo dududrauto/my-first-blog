@@ -25,7 +25,7 @@ SECRET_KEY = '4#^qjm$ww*i$taue*j3z3i(h&g6r#@w_r&))uz@*-5alpe67$-'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = []#['*'] para debug false, sem colocar o host, menos seguro!!!!
 
 
 # Application definition
@@ -52,7 +52,12 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'app.middleware.AutoLogout', #fonte: http://stackoverflow.com/questions/14830669/how-to-expire-django-session-in-5minutes
 )
+
+# Auto logout delay in minutes fonte: http://stackoverflow.com/questions/14830669/how-to-expire-django-session-in-5minutes
+AUTO_LOGOUT_DELAY = 30 #equivalent to 5 minutes
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer' #há um risco, mas assim funciona o autologout
 
 ROOT_URLCONF = 'mysite.urls'
 

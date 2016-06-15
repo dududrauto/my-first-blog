@@ -42,7 +42,7 @@ class Mandado(models.Model):
     numero_mandado = models.IntegerField(verbose_name="Número do Mandado", unique=True)
     ano_mandado = models.CharField(max_length=4, default=str(datetime.date.today().year))
     codigo_mandado = models.CharField(max_length=20, null=True, blank=True)
-    data = models.DateField(default=django.utils.timezone.now(), help_text="Data de recebimento.")
+    data = models.DateField(default='django.utils.timezone.now', help_text="Data de recebimento.")
     oficial = models.ForeignKey('Oficial', related_name='mandados',
                                 help_text='Se em em branco, preenche automaticamente com o usuario atual.', null=True,
                                 blank=True)
@@ -175,7 +175,7 @@ class Oficial(models.Model):
         verbose_name = 'Oficial'
         verbose_name_plural = 'Oficiais'
 
-    usuario = models.ForeignKey(User, unique=True)
+    usuario = models.OneToOneField(User)
     telefone = models.DecimalField(max_digits=10, decimal_places=0, )
     email = models.EmailField(null=True, blank=True)
     cpf = models.CharField(max_length=11, default='12345678901')

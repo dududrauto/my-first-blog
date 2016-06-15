@@ -3,7 +3,9 @@ from django.contrib import admin
 from app.models import *#Mandado, Oficial, Endereco, CEP, Ordem, Modelo_Documento, Telefone
 import datetime
 from django.template import Context, Template, loader
-
+from app.printing import MyPrint
+from io import BytesIO
+from django.http import HttpResponse
 
 class TelefoneInline(admin.TabularInline):
     model = Telefone
@@ -19,9 +21,31 @@ def export_aviso(modeladmin, request, queryset):
     f.close()
 
 export_aviso.short_description = "marque mandados para mala direta"
-
+'''
 def make_av(modeladmin, request, queryset):
     queryset.update(status_cumprimento=1)
+make_av.short_description = "marque os mandados para avisados"
+'''
+
+def make_av(modeladmin, request, queryset):
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="myUsers.pdf"'#se comentar essa linha o arquivo abre no navegador
+
+    buffer = BytesIO()
+
+    report = MyPrint(buffer, 'Letter')
+
+    #d = Diligencia.objects.all()#envia uma lista de diligencias para a função print_documentos
+    #pdf = report.print_documentos(d)
+    pdf = report.print_avisos(queryset)
+    '''
+
+    d = Diligencia.objects.all()[0]#envia uma diligencia para a função print_documento
+    pdf = report.print_documentos(d)
+
+    '''
+    response.write(pdf)
+    return response
 make_av.short_description = "marque os mandados para avisados"
 
 def make_dv(modeladmin, request, queryset):
