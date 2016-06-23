@@ -149,11 +149,11 @@ class MyPrint:
         #users = User.objects.all()
         for mandado in mandados:
             c = template.Context({'mandado':mandado})
-            t = template.Template(av.modelo)
+            t = template.Template(html.unescape(av.modelo))
             modelo_html = t.render(c)
 
             parser = MyHTMLParser()
-            parser.feed(html.unescape(modelo_html))
+            parser.feed(modelo_html)
             documento = parser.list_data
             #elements.append(Paragraph('My User Names', styles['Heading1'],))
             for i, user in enumerate(documento):
