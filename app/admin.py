@@ -46,6 +46,7 @@ def make_av(modeladmin, request, queryset):
     '''
     response.write(pdf)
     return response
+
 make_av.short_description = "fazer avisos para os mandados"
 
 def make_dv(modeladmin, request, queryset):

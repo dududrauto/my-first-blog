@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from tinymce.models import HTMLField
 import django
 import datetime
-
+import django.utils.timezone
 
 # Create your models here.
 
@@ -42,7 +42,7 @@ class Mandado(models.Model):
     numero_mandado = models.IntegerField(verbose_name="Número do Mandado", unique=True)
     ano_mandado = models.CharField(max_length=4, default=str(datetime.date.today().year))
     codigo_mandado = models.CharField(max_length=20, null=True, blank=True)
-    data = models.DateField(default='django.utils.timezone.now', help_text="Data de recebimento.")
+    data = models.DateField(default=django.utils.timezone.datetime.now, help_text="Data de recebimento.")
     oficial = models.ForeignKey('Oficial', related_name='mandados',
                                 help_text='Se em em branco, preenche automaticamente com o usuario atual.', null=True,
                                 blank=True)
@@ -227,8 +227,8 @@ class Modelo_Documento(models.Model):
 
 class Diligencia(models.Model):
     mandado = models.ForeignKey(Mandado)
-    data_diligencia = models.DateField(auto_now_add=True)
-    hora_diligencia = models.TimeField(auto_now_add=True)
+    data_diligencia = models.DateField(default=django.utils.timezone.datetime.now)#datetime.today())
+    hora_diligencia = models.TimeField(default=django.utils.timezone.datetime.now)#datetime.now())
     tipo_diligencia = models.ForeignKey("Tipo_Diligencia", blank=True, null=True)
     latitude = models.CharField(max_length=30, blank=True, null=True)
     longitude = models.CharField(max_length=30, blank=True, null=True)
