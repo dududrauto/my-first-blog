@@ -167,7 +167,7 @@ class MyPrint:
         pdf = open("out.pdf",'rb').read()
         os.remove("out.pdf")  # remove the locally created pdf file.
         '''
-        pdf_file = HTML(string=modelo_html).write_pdf()
+        pdf_file = HTML(string=modelo_html).write_pdf('/mywebsite.pdf', stylesheets=[CSS(string='body { font-family: Arial }')])
         return pdf_file  # returns the response.
 
 
