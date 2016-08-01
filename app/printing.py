@@ -124,7 +124,55 @@ class MyPrint:
         buffer.close()
         return pdf
 
+    def print_avisos(self, mandados):
+        """
+        :param mandados:
+        :return:
+        """
+        from weasyprint import HTML, CSS
+        from django.conf import settings
+        av = Modelo_Documento.objects.get(nome='AVISO')
 
+        modelo_html = ''
+        for i in range(len(mandados)):
+            if i == 0:                                          #primeiro aviso
+                modelo_html += '<!DOCTYPE html>' \
+                                  '<head>' \
+                                  '<meta charset="utf-8" />' \
+                                  '</head>' \
+                                  '<body>' \
+                                  '<div style="float: none;">' \
+                                  '<div>'
+                c = template.Context({'mandado':mandados[0]})
+                t = template.Template(av.modelo)
+                modelo_html += t.render(c)
+                modelo_html += '</div>'
+            else:                                               #avisos intermediarios
+                modelo_html += '<div style="page-break-before:always;">'
+                c = template.Context({'mandado':mandados[i]})
+                t = template.Template(av.modelo)
+                modelo_html += t.render(c)
+                modelo_html += '</div>'
+        modelo_html += '</div></body>'
+        print(modelo_html)
+        '''
+        options = {
+            'page-size': 'A4',
+            'margin-top': '0.75in',
+            'margin-right': '0.75in',
+            'margin-bottom': '0.75in',
+            'margin-left': '1.25in',
+        }
+        pdfkit.from_string(modelo_html, 'out.pdf', options=options)
+        pdf = open("out.pdf",'rb').read()
+        os.remove("out.pdf")  # remove the locally created pdf file.
+        '''
+        pdf_file = HTML(string=modelo_html).write_pdf()
+        return pdf_file  # returns the response.
+
+
+
+    ''' funciona com o pdfkit wkhtmltopdf
     def print_avisos(self, mandados):
         """
         :param mandados:
@@ -167,8 +215,8 @@ class MyPrint:
         os.remove("out.pdf")  # remove the locally created pdf file.
         return pdf  # returns the response.
 
-
-    '''                 antigo com reportlab
+    '''
+    '''antigo com reportlab
     def print_avisos(self, mandados):
         """
 
