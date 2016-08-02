@@ -138,7 +138,7 @@ class MyPrint:
             if i == 0:                                          #primeiro aviso
                 modelo_html += '<!DOCTYPE html>' \
                                   '<head>' \
-                                  '<meta charset="utf-8" />' \
+                                  '<meta encoding="utf-8" />' \#'<meta charset="utf-8" />' \
                                   '</head>' \
                                   '<body>' \
                                   '<div style="float: none;">' \
