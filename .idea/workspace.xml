@@ -61,8 +61,8 @@
       <file leaf-file-name="printing.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/printing.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.48641977">
-              <caret line="153" column="67" selection-start-line="153" selection-start-column="67" selection-end-line="153" selection-end-column="67" />
+            <state vertical-scroll-proportion="0.89382714">
+              <caret line="169" column="68" selection-start-line="169" selection-start-column="68" selection-end-line="169" selection-end-column="68" />
               <folding>
                 <element signature="e#20#66#0" expanded="true" />
               </folding>
@@ -510,7 +510,13 @@
       <option name="project" value="LOCAL" />
       <updated>1470095592853</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="atualizacao">
+      <created>1470096250568</created>
+      <option name="number" value="00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1470096250569</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TodoView">
@@ -935,8 +941,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/printing.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.48641977">
-          <caret line="153" column="67" selection-start-line="153" selection-start-column="67" selection-end-line="153" selection-end-column="67" />
+        <state vertical-scroll-proportion="0.89382714">
+          <caret line="169" column="68" selection-start-line="169" selection-start-column="68" selection-end-line="169" selection-end-column="68" />
           <folding>
             <element signature="e#20#66#0" expanded="true" />
           </folding>

@@ -151,7 +151,7 @@ class MyPrint:
                 modelo_html += '<div style="page-break-before:always;">'
                 c = template.Context({'mandado':mandados[i]})
                 t = template.Template(av.modelo)
-                modelo_html += t.render(c).encode(encoding="UTF-8")
+                modelo_html += t.render(c).encode(encoding="UTF-8")#.render(c)
                 modelo_html += '</div>'
         modelo_html += '</div></body>'
         print(modelo_html)
@@ -167,7 +167,7 @@ class MyPrint:
         pdf = open("out.pdf",'rb').read()
         os.remove("out.pdf")  # remove the locally created pdf file.
         '''
-        pdf_file = HTML(string=modelo_html).write_pdf(stylesheets=[CSS(string='body { font-family: Arial }')])
+        pdf_file = HTML(string=modelo_html.encode(encoding="UTF-8")).write_pdf(stylesheets=[CSS(string='body { font-family: Arial }')])
         return pdf_file  # returns the response.
 
 
