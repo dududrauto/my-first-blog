@@ -59,7 +59,7 @@ class Mandado(models.Model):
     cor_urgencia = models.CharField(max_length=2, choices=(('1', 'vermelho'),
                                                            ('2', 'amarelo'),
                                                            ('3', 'verde')), default='1')
-    rota = models.CharField(max_length=3, default='0')
+    rota = models.IntegerField(default=0)
     owner = models.ForeignKey('auth.User', related_name='mands', null=True, blank=True)
 
     def __str__(self):
