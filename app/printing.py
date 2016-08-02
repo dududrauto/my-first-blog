@@ -151,7 +151,7 @@ class MyPrint:
                 modelo_html += '<div style="page-break-before:always;">'
                 c = template.Context({'mandado':mandados[i]})
                 t = template.Template(av.modelo)
-                modelo_html += t.render(c)
+                modelo_html += t.render(c).encode(encoding="UTF-8")
                 modelo_html += '</div>'
         modelo_html += '</div></body>'
         print(modelo_html)
