@@ -135,10 +135,10 @@ class MyPrint:
 
         modelo_html = ''
         for i in range(len(mandados)):
-            if i == 0:                                          #primeiro aviso
+            if i == 0:                                          #primeiro aviso # '<meta charset="utf-8" />'
                 modelo_html += '<!DOCTYPE html>' \
                                   '<head>' \
-                                  '<meta encoding="utf-8" />' \#'<meta charset="utf-8" />' \
+                                  '<meta encoding="utf-8" />' \
                                   '</head>' \
                                   '<body>' \
                                   '<div style="float: none;">' \
