@@ -138,11 +138,12 @@ class MyPrint:
         for i in range(len(mandados)):
             if i == 0:                                          #primeiro aviso # '<meta charset="utf-8" />'
                 modelo_html += '<html>' \
-                                  '<head>' \
-                                  '</head>' \
-                                  '<body>' \
-                                  '<div style="float: none;">' \
-                                  '<div>'
+                               '<head>' \
+                               '<meta charset="utf-8" />' \
+                               '</head>' \
+                               '<body>' \
+                               '<div style="float: none;">' \
+                               '<div>'
                 c = template.Context({'mandado':mandados[0]})
                 t = template.Template(av.modelo)
                 modelo_html += t.render(c)
@@ -151,7 +152,7 @@ class MyPrint:
                 modelo_html += '<div style="page-break-before:always;">'
                 c = template.Context({'mandado':mandados[i]})
                 t = template.Template(av.modelo)
-                modelo_html += t.render(c).encode(encoding="UTF-8")#.render(c)
+                modelo_html += t.render(c)
                 modelo_html += '</div>'
         modelo_html += '</div></body></html>'
         print(modelo_html)
