@@ -124,6 +124,7 @@ class MyPrint:
         buffer.close()
         return pdf
 
+    ''' nao funcionou com weasyprint'''
     def print_avisos(self, mandados):
         """
         :param mandados:
@@ -154,22 +155,12 @@ class MyPrint:
                 modelo_html += '</div>'
         modelo_html += '</div></body></html>'
         print(modelo_html)
-        '''
-        options = {
-            'page-size': 'A4',
-            'margin-top': '0.75in',
-            'margin-right': '0.75in',
-            'margin-bottom': '0.75in',
-            'margin-left': '1.25in',
-        }
-        pdfkit.from_string(modelo_html, 'out.pdf', options=options)
-        pdf = open("out.pdf",'rb').read()
-        os.remove("out.pdf")  # remove the locally created pdf file.
-        '''
-        pdf_file = HTML(string=modelo_html.encode(encoding="UTF-8")).write_pdf(stylesheets=[CSS(string='body { font-family: Arial }')],encoding="utf-8")
+        pdf_html = HTML(string=modelo_html)
+        main_doc = pdf_html.render()
+        pdf_file = main_doc.write_pdf()
         #pdf_file = HTML('http://weasyprint.org/').write_pdf('/tmp/weasyprint-website.pdf')
         return pdf_file  # returns the response.
-
+    ''''''
 
 
     ''' funciona com o pdfkit wkhtmltopdf
@@ -264,6 +255,8 @@ class MyPrint:
         pdf = buffer.getvalue()
         buffer.close()
         return pdf
+
+
     '''
 
 
