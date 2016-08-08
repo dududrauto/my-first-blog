@@ -124,7 +124,7 @@ class MyPrint:
         buffer.close()
         return pdf
 
-    ''' nao funcionou com weasyprint'''
+    ''' funcionou com weasyprint ideal para o pythonanyhere!!'''
     def print_avisos(self, mandados):
         """
         :param mandados:
@@ -164,7 +164,7 @@ class MyPrint:
     ''''''
 
 
-    ''' funciona com o pdfkit wkhtmltopdf
+    ''' funciona com o pdfkit wkhtmltopdf não roda no pythonanywhere, não instala o wkhtmltopdf
     def print_avisos(self, mandados):
         """
         :param mandados:

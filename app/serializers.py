@@ -154,6 +154,7 @@ class Estatus_CumprimetoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Estatus_Cumprimento
         fields = (
+            'id',
             'estatus_cumprimento',
             'descricao',
             'flag_cumprimento',
