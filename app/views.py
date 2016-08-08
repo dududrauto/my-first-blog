@@ -100,8 +100,8 @@ class OrdemDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = OrdemSerializer
 
 class TipoDiligenciaList(generics.ListCreateAPIView):
-    queryset = Diligencia.objects.all()
-    serializer_class = DiligenciaSerializer
+    queryset = Tipo_Diligencia.objects.all()
+    serializer_class = Tipo_DiligenciaSerializer
 
 
 class TipoDiligenciaDetail(generics.RetrieveUpdateDestroyAPIView):
