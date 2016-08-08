@@ -3,7 +3,7 @@ __author__ = 'Dudu'
 from django.forms import widgets
 from rest_framework import serializers
 from app.models import Mandado, Oficial, Telefone, Diligencia, Tipo_Diligencia,\
-    Estatus_Cumprimento, Foto, Audio, Vara, Comarca
+    Estatus_Cumprimento, Foto, Audio, Vara, Comarca, Ordem
 from django.contrib.auth.models import User
 
 
@@ -158,6 +158,17 @@ class Estatus_CumprimetoSerializer(serializers.ModelSerializer):
             'estatus_cumprimento',
             'descricao',
             'flag_cumprimento',
+        )
+
+
+class OrdemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Ordem
+        fields = (
+            'id',
+            'ordem',
+            'descricao',
+            'diligencia_positiva',
         )
 
 

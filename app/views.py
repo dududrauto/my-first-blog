@@ -2,10 +2,10 @@ from django.shortcuts import render
 
 # Create your views here.
 from app.models import Mandado, Oficial, Telefone, Diligencia, Tipo_Diligencia, Estatus_Cumprimento, \
-    Foto, Audio, Comarca, Vara
+    Foto, Audio, Comarca, Vara, Ordem
 from app.serializers import MandadoSerializer, OficialSerializer, TelefoneSerializer,\
     DiligenciaSerializer, Tipo_DiligenciaSerializer, Estatus_CumprimetoSerializer, FotoSerializer, AudioSerializer, \
-    VaraSerializer, ComarcaSerializer
+    VaraSerializer, ComarcaSerializer, OrdemSerializer
 from rest_framework import generics
 from django.contrib.auth.models import User
 from rest_framework import permissions
@@ -89,6 +89,15 @@ class EstatusCumprimentoDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Estatus_Cumprimento.objects.all()
     serializer_class = Estatus_CumprimetoSerializer
 
+
+class OrdemList(generics.ListCreateAPIView):
+    queryset = Ordem.objects.all()
+    serializer_class = OrdemSerializer
+
+
+class OrdemDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Ordem.objects.all()
+    serializer_class = OrdemSerializer
 
 class TipoDiligenciaList(generics.ListCreateAPIView):
     queryset = Diligencia.objects.all()
