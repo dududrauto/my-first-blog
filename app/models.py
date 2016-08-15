@@ -291,3 +291,8 @@ class Audio(models.Model):
 
     def __str__(self):
         return 'Audio'+' '+str(self.diligencia)
+
+
+class Atendimento(models.Model):
+    oficial = models.ForeignKey(Oficial)
+    atendimento = models.DateTimeField()

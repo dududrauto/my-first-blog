@@ -198,6 +198,7 @@ admin.site.register(Diligencia)
 admin.site.register(Tipo_Diligencia)
 admin.site.register(Comarca)
 admin.site.register(Vara)
+admin.site.register(Atendimento)
 #admin.site.register(Foto)
 #admin.site.register(Audio)
 

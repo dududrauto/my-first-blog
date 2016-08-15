@@ -43,80 +43,96 @@ def print_users(request):
 class ComarcaList(generics.ListCreateAPIView):
     queryset = Comarca.objects.all()
     serializer_class = ComarcaSerializer
+    permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly,)
 
 
 class ComarcaDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Comarca.objects.all()
     serializer_class = ComarcaSerializer
-
+    permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly,)
 
 class VaraList(generics.ListCreateAPIView):
     queryset = Vara.objects.all()
     serializer_class = VaraSerializer
+    permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly,)
 
 
 class VaraDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Vara.objects.all()
     serializer_class = VaraSerializer
+    permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly,)
 
 
 class AudioList(generics.ListCreateAPIView):
     queryset = Audio.objects.all()
     serializer_class = AudioSerializer
+    permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly,)
 
 
 class AudioDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Audio.objects.all()
     serializer_class = AudioSerializer
+    permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly,)
 
 
 class FotoList(generics.ListCreateAPIView):
     queryset = Foto.objects.all()
     serializer_class = FotoSerializer
+    permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly,)
 
 
 class FotoDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Foto.objects.all()
     serializer_class = FotoSerializer
+    permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly,)
 
 
 class EstatusCumprimentoList(generics.ListCreateAPIView):
     queryset = Estatus_Cumprimento.objects.all()
     serializer_class = Estatus_CumprimetoSerializer
+    permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly,)
 
 
 class EstatusCumprimentoDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Estatus_Cumprimento.objects.all()
     serializer_class = Estatus_CumprimetoSerializer
+    permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly,)
 
 
 class OrdemList(generics.ListCreateAPIView):
     queryset = Ordem.objects.all()
     serializer_class = OrdemSerializer
+    permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly,)
 
 
 class OrdemDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Ordem.objects.all()
     serializer_class = OrdemSerializer
+    permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly,)
+
 
 class TipoDiligenciaList(generics.ListCreateAPIView):
     queryset = Tipo_Diligencia.objects.all()
     serializer_class = Tipo_DiligenciaSerializer
+    permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly,)
 
 
 class TipoDiligenciaDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Tipo_Diligencia.objects.all()
     serializer_class = Tipo_DiligenciaSerializer
+    permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly,)
 
 
 class DiligenciaList(generics.ListCreateAPIView):
     queryset = Diligencia.objects.all()
     serializer_class = DiligenciaSerializer
+    permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly,)
 
 
 class DiligenciaDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Diligencia.objects.all()
     serializer_class = DiligenciaSerializer
+    permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly,)
 
 '''
 class EnderecoList(generics.ListCreateAPIView):
@@ -142,7 +158,8 @@ class CepDetail(generics.RetrieveUpdateDestroyAPIView):#para não deletar trocar
 class MandadoList(generics.ListCreateAPIView):
     #queryset = Mandado.objects.all()
     serializer_class = MandadoSerializer
-    permission_classes = (permissions.IsAuthenticated,) #.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly,)
+    #permission_classes = (permissions.IsAuthenticated,) #.IsAuthenticatedOrReadOnly,)
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
@@ -158,14 +175,14 @@ class MandadoList(generics.ListCreateAPIView):
 class MandadoDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Mandado.objects.all()
     serializer_class = MandadoSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,
-                           IsOwnerOrReadOnly,)
+    #permission_classes = (permissions.IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly,)
+    permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly,)
 
 
 class TelefoneList(generics.ListCreateAPIView):
     queryset = Telefone.objects.all()
     serializer_class = TelefoneSerializer
-    permission_classes = (permissions.IsAuthenticated,) #.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly,)
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
@@ -182,18 +199,20 @@ class TelefoneList(generics.ListCreateAPIView):
 class TelefoneDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Telefone.objects.all()
     serializer_class = TelefoneSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,
-                           IsOwnerOrReadOnly,)
+    permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly,)
 
 
 class OficialList(generics.ListAPIView):
     queryset = Oficial.objects.all()
     serializer_class = OficialSerializer
+    permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly,)
 
 
 class OficialDetail(generics.RetrieveAPIView):
     queryset = Oficial.objects.all()
     serializer_class = OficialSerializer
+    permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly,)
+
 
 """
 
