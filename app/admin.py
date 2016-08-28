@@ -131,6 +131,23 @@ class CEPAdmin(admin.ModelAdmin):
             'admin/js/cep.js',
         )
 
+
+class AtendimentoAdmin(admin.ModelAdmin):
+    fields = ['data', 'inicio', 'fim']#'oficial',
+    def save_model(self, request, obj, form, change):
+        if getattr(obj, 'oficial', None) is None:
+            oj = Oficial.objects.get(usuario=request.user)
+            obj.oficial = oj
+        obj.save()
+
+    def get_queryset(self, request):
+        qs = super(AtendimentoAdmin, self).get_queryset(request)
+        # Se for superusuario, mostre todos os comentarios
+        if request.user.is_superuser:
+            return qs
+        oj = Oficial.objects.get(usuario=request.user)
+        return qs.filter(oficial=oj)
+
 '''
 class AvisoAdmin(admin.ModelAdmin):
 #    inlines = [AtendimentoInline]
@@ -198,7 +215,7 @@ admin.site.register(Diligencia)
 admin.site.register(Tipo_Diligencia)
 admin.site.register(Comarca)
 admin.site.register(Vara)
-admin.site.register(Atendimento)
+admin.site.register(Atendimento, AtendimentoAdmin)
 #admin.site.register(Foto)
 #admin.site.register(Audio)
 

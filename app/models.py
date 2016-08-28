@@ -248,6 +248,7 @@ class Tipo_Diligencia(models.Model):
     estatus_cumprimento = models.ForeignKey(Estatus_Cumprimento)
     diligencia_positiva = models.BooleanField(default=False)
     diligencia_cumprida = models.BooleanField(default=False)
+    diligencia_parcial = models.BooleanField(default=False)
     endereco_ERRO = models.BooleanField(default=False)
     diligencia_nao_mora = models.BooleanField(default=False)
     verificado_em_loco = models.BooleanField(default=False)
@@ -294,5 +295,10 @@ class Audio(models.Model):
 
 
 class Atendimento(models.Model):
-    oficial = models.ForeignKey(Oficial)
-    atendimento = models.DateTimeField()
+    oficial = models.ForeignKey(Oficial)#, null=True, blank=True)
+    data = models.DateField()
+    inicio = models.TimeField(null=True, blank=True)
+    fim = models.TimeField(null=True, blank=True)
+
+    def __str__(self):
+        return str(self.oficial)+' Atendimento'+' '+str(self.data)

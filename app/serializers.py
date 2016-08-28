@@ -142,6 +142,7 @@ class Tipo_DiligenciaSerializer(serializers.ModelSerializer):
             'estatus_cumprimento',
             'diligencia_positiva',
             'diligencia_cumprida',
+            'diligencia_parcial',
             'endereco_ERRO',
             'diligencia_nao_mora',
             'verificado_em_loco',
