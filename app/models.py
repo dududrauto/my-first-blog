@@ -240,6 +240,14 @@ class Diligencia(models.Model):
     def __str__(self):
         return str(self.mandado)+' '+str(self.tipo_diligencia)
 
+    def save(self, request=None, *args, **kwargs):
+        from django import template
+        #super(Diligencia, self).save(*args, **kwargs) # Call the "real" save() method.
+        t = template.Template(self.tipo_diligencia.modelo_documento.modelo)
+        c = template.Context({'mandado':self.mandado, "diligencia":self})
+        self.documento = t.render(c)
+        super(Diligencia, self).save(*args, **kwargs)
+
 
 class Tipo_Diligencia(models.Model):
     nome = models.CharField(max_length=50)
