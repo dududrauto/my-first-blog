@@ -164,7 +164,8 @@ class CEP(models.Model):
 class Estatus_Cumprimento(models.Model):
     estatus_cumprimento = models.CharField(max_length=20)
     descricao = models.TextField()
-    flag_cumprimento = models.BooleanField()
+    exibir_mapa = models.BooleanField()
+    cumprimento = models.BooleanField(default=False)
 
     def __str__(self):
         return str(self.estatus_cumprimento)
@@ -255,8 +256,9 @@ class Tipo_Diligencia(models.Model):
     modelo_documento = models.ForeignKey(Modelo_Documento, null=True, blank=True)
     estatus_cumprimento = models.ForeignKey(Estatus_Cumprimento)
     diligencia_positiva = models.BooleanField(default=False)
-    diligencia_cumprida = models.BooleanField(default=False)
     diligencia_parcial = models.BooleanField(default=False)
+    diligencia_negativa = models.BooleanField(default=False)
+    diligencia_cumprida = models.BooleanField(default=False)
     endereco_ERRO = models.BooleanField(default=False)
     diligencia_nao_mora = models.BooleanField(default=False)
     verificado_em_loco = models.BooleanField(default=False)

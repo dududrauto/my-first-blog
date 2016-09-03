@@ -76,11 +76,12 @@ make_OfX.short_description = "transfere para oficial x, provisorio"##provisorio 
 
 class MandadoAdmin(admin.ModelAdmin):
 
-    list_display = ['codigo_mandado', 'data', 'audiencia', 'destinatario', 'cidade', 'rua', 'ordem', 'conducao', 'status_cumprimento']
+    list_display = ['codigo_mandado', 'data', 'audiencia', 'destinatario', 'cidade', 'rua', 'numero', 'ordem',
+                    'conducao', 'status_cumprimento']
     ordering = ['numero_mandado']
-    search_fields = ['numero_mandado', 'destinatario']
-    list_editable = ['conducao', 'status_cumprimento']
-    list_filter = ['audiencia', 'conducao', 'status_cumprimento', 'data']
+    search_fields = ['numero_mandado', 'destinatario', 'rua']
+    list_editable = []
+    list_filter = ['status_cumprimento', 'audiencia', 'conducao', 'ordem']
     list_max_show_all = 1000
     fieldsets = (
          (None, {#1
@@ -141,12 +142,14 @@ class AtendimentoAdmin(admin.ModelAdmin):
         obj.save()
 
     def get_queryset(self, request):
+        from django.utils import datetime_safe
         qs = super(AtendimentoAdmin, self).get_queryset(request)
         # Se for superusuario, mostre todos os comentarios
         if request.user.is_superuser:
             return qs
         oj = Oficial.objects.get(usuario=request.user)
-        return qs.filter(oficial=oj)
+
+        return qs.filter(oficial=oj, data__gt=datetime_safe.date.today())
 
 '''
 class AvisoAdmin(admin.ModelAdmin):
