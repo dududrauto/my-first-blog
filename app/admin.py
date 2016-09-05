@@ -29,26 +29,19 @@ make_av.short_description = "marque os mandados para avisados"
 
 def make_av(modeladmin, request, queryset):
     response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename="myUsers.pdf"'#se comentar essa linha o arquivo abre no navegador
+    response['Content-Disposition'] = 'attachment; filename="Avisos.pdf"'#se comentar essa linha o arquivo abre no navegador
 
     buffer = BytesIO()
 
     report = MyPrint(buffer, 'Letter')
+    pdf = report.print_avisos(request, queryset)
 
-    #d = Diligencia.objects.all()#envia uma lista de diligencias para a função print_documentos
-    #pdf = report.print_documentos(d)
-    pdf = report.print_avisos(queryset)
-    '''
-
-    d = Diligencia.objects.all()[0]#envia uma diligencia para a função print_documento
-    pdf = report.print_documentos(d)
-
-    '''
     response.write(pdf)
     return response
 
 make_av.short_description = "fazer avisos para os mandados"
 
+'''
 def make_dv(modeladmin, request, queryset):
     queryset.update(status_cumprimento=2)
 make_dv.short_description = "marque os mandados para devolvidos"
@@ -72,7 +65,7 @@ make_cert.short_description = "marque os mandados para Certificar"
 def make_OfX(modeladmin, request, queryset):
     queryset.update(oficial=1)#"2 cristian" "1 drauto" "3 eu mesmo" "4 kleber"
 make_OfX.short_description = "transfere para oficial x, provisorio"##provisorio so p nao carregar no ifone...
-
+'''
 
 class MandadoAdmin(admin.ModelAdmin):
 
