@@ -122,7 +122,7 @@ class MandadoAdmin(admin.ModelAdmin):
 
 class DiligenciaAdmin(admin.ModelAdmin):
 
-    list_display = ['__str__', 'mandado', 'editar_documento', 'tipo_diligencia', 'data_diligencia']
+    list_display = ['__str__', 'mandado', 'tipo_diligencia', 'data_diligencia', 'not_editar_documento', ]
     ordering = ['mandado__numero_mandado']
     search_fields = ['mandado__numero_mandado']
     list_editable = []
@@ -131,14 +131,16 @@ class DiligenciaAdmin(admin.ModelAdmin):
     fieldsets = (
          (None, {#1
                  'classes': ('wide',),
-                 'fields': (('mandado', 'tipo_diligencia', 'editar_documento', ),
-                            ('documento',),
+                 'fields': ('mandado', 'tipo_diligencia', 'documento',
                             )}),
          ('Campos Complementares', {
              'classes': ('collapse',),
-             'fields': ('data_diligencia', 'hora_diligencia', 'latitude', 'longitude', 'data_agendamento', 'hora_agendamento'),
+             'fields': ('editar_documento', 'data_diligencia', 'hora_diligencia', 'latitude', 'longitude',
+                        'data_agendamento', 'hora_agendamento'),
          }),
     )
+    readonly_fields = ('mandado', 'tipo_diligencia', 'data_diligencia', 'hora_diligencia', 'latitude', 'longitude', 'data_agendamento',
+                       'hora_agendamento', 'editar_documento')
 
     class Media:
         pass

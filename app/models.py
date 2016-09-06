@@ -63,7 +63,7 @@ class Mandado(models.Model):
     owner = models.ForeignKey('auth.User', related_name='mands', null=True, blank=True)
 
     def __str__(self):
-        return str(self.numero_mandado)
+        return str(self.codigo_mandado)
 
 
 """
