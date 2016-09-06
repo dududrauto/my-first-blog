@@ -63,7 +63,7 @@ class MyPrint:
                 modelo_html += t.render(c)
                 modelo_html += '</div>'
         modelo_html += '</div></body></html>'
-        print(modelo_html)
+        #print(modelo_html)
         pdf_html = HTML(string=modelo_html)
         main_doc = pdf_html.render()
         pdf_file = main_doc.write_pdf()
@@ -71,6 +71,39 @@ class MyPrint:
         return pdf_file  # returns the response.
     ''''''
 
+    def print_certidao(self, request, diligencias):
+        """
+        :param diligencias:
+        :return:
+        """
+        from weasyprint import HTML, CSS
+        from django.conf import settings
+        from app.models import Diligencia
+        from django.utils import datetime_safe
+
+
+        modelo_html = ''
+        for i in range(len(diligencias)):
+            if i == 0:                                          #primeira certidão # '<meta charset="utf-8" />'
+                modelo_html += '<html>' \
+                               '<head>' \
+                               '<meta charset="utf-8" />' \
+                               '</head>' \
+                               '<body>' \
+                               '<div style="float: none;">' \
+                               '<div>'
+                modelo_html += diligencias[i].documento
+                modelo_html += '</div>'
+            else:                                               #certidões intermediarias
+                modelo_html += '<div style="page-break-before:always;">'
+                modelo_html += diligencias[i].documento
+                modelo_html += '</div>'
+        modelo_html += '</div></body></html>'
+        pdf_html = HTML(string=modelo_html)
+        main_doc = pdf_html.render()
+        pdf_file = main_doc.write_pdf()
+        #pdf_file = HTML('http://weasyprint.org/').write_pdf('/tmp/weasyprint-website.pdf')
+        return pdf_file  # returns the response.
 
     ''' funciona com o pdfkit wkhtmltopdf não roda no pythonanywhere, não instala o wkhtmltopdf
     def print_avisos(self, mandados):

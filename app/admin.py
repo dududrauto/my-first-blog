@@ -41,6 +41,21 @@ def make_av(modeladmin, request, queryset):
 
 make_av.short_description = "fazer avisos para os mandados"
 
+def make_certidao(modeladmin, request, queryset):
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="Avisos.pdf"'#se comentar essa linha o arquivo abre no navegador
+
+    buffer = BytesIO()
+
+    report = MyPrint(buffer, 'Letter')
+    pdf = report.print_certidao(request, queryset)
+
+    response.write(pdf)
+    return response
+
+make_certidao.short_description = "fazer certidoes para os mandados"
+
+
 '''
 def make_dv(modeladmin, request, queryset):
     queryset.update(status_cumprimento=2)
@@ -145,7 +160,7 @@ class DiligenciaAdmin(admin.ModelAdmin):
     class Media:
         pass
 
-    actions = []#[export_aviso, make_av, make_dv, make_N, make_URG, make_con, make_cert, make_OfX]
+    actions = [make_certidao, ]
 
     def save_model(self, request, obj, form, change):
         obj.editar_documento = False
