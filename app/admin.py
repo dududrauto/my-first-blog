@@ -119,6 +119,46 @@ class MandadoAdmin(admin.ModelAdmin):
 
         return qs.filter(oficial__usuario=request.user)
 
+
+class DiligenciaAdmin(admin.ModelAdmin):
+
+    list_display = ['__str__', 'mandado', 'editar_documento', 'tipo_diligencia', 'data_diligencia']
+    ordering = ['mandado__numero_mandado']
+    search_fields = ['mandado__numero_mandado']
+    list_editable = []
+    list_filter = ['editar_documento', 'tipo_diligencia',]
+    list_max_show_all = 1000
+    fieldsets = (
+         (None, {#1
+                 'classes': ('wide',),
+                 'fields': (('mandado', 'tipo_diligencia', 'editar_documento', ),
+                            ('documento',),
+                            )}),
+         ('Campos Complementares', {
+             'classes': ('collapse',),
+             'fields': ('data_diligencia', 'hora_diligencia', 'latitude', 'longitude', 'data_agendamento', 'hora_agendamento'),
+         }),
+    )
+
+    class Media:
+        pass
+
+    actions = []#[export_aviso, make_av, make_dv, make_N, make_URG, make_con, make_cert, make_OfX]
+
+    def save_model(self, request, obj, form, change):
+        obj.editar_documento = False
+        obj.save()
+
+    def get_queryset(self, request):
+        qs = super(DiligenciaAdmin, self).get_queryset(request)
+        # Se for superusuario, mostre todos os comentarios
+        if request.user.is_superuser:
+            return qs
+
+        return qs.filter(mandado__oficial__usuario=request.user)
+
+
+
 class CEPAdmin(admin.ModelAdmin):
     class Media:
         js = (
@@ -207,7 +247,7 @@ admin.site.register(Oficial)
 admin.site.register(Ordem)
 admin.site.register(Telefone)
 admin.site.register(Modelo_Documento)
-admin.site.register(Diligencia)
+admin.site.register(Diligencia, DiligenciaAdmin)
 admin.site.register(Tipo_Diligencia)
 admin.site.register(Comarca)
 admin.site.register(Vara)

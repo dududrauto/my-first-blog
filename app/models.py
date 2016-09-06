@@ -63,7 +63,7 @@ class Mandado(models.Model):
     owner = models.ForeignKey('auth.User', related_name='mands', null=True, blank=True)
 
     def __str__(self):
-        return str(self.ano_mandado) + '/' + str(self.numero_mandado)
+        return str(self.numero_mandado)
 
 
 """
@@ -228,7 +228,7 @@ class Modelo_Documento(models.Model):
 
 class Diligencia(models.Model):
     mandado = models.ForeignKey(Mandado)
-    data_diligencia = models.DateField(default=django.utils.timezone.datetime.now)#datetime.today())
+    data_diligencia = models.DateField('Data da Diligência',default=django.utils.timezone.datetime.now)#datetime.today())
     hora_diligencia = models.TimeField(default=django.utils.timezone.datetime.now)#datetime.now())
     tipo_diligencia = models.ForeignKey("Tipo_Diligencia", blank=True, null=True)
     latitude = models.CharField(max_length=30, blank=True, null=True)
@@ -239,7 +239,7 @@ class Diligencia(models.Model):
     editar_documento = models.BooleanField(default=False)
 
     def __str__(self):
-        return str(self.mandado)+' '+str(self.tipo_diligencia)
+        return str(self.mandado.codigo_mandado)+' '+str(self.tipo_diligencia)
 
     def save(self, request=None, *args, **kwargs):
         from django import template
