@@ -237,16 +237,21 @@ class Diligencia(models.Model):
     hora_agendamento = models.TimeField(blank=True, null=True)
     documento = HTMLField(blank=True, null=True)
     editar_documento = models.BooleanField(default=False)
+    not_editar_documento = models.BooleanField('Editar Certidão', default=True)#inversão do flag, para exibir corretamente no admin
+    rendered = models.BooleanField(default=False)
 
     def __str__(self):
         return str(self.mandado.codigo_mandado)+' '+str(self.tipo_diligencia)
 
     def save(self, request=None, *args, **kwargs):
         from django import template
-        #super(Diligencia, self).save(*args, **kwargs) # Call the "real" save() method.
-        t = template.Template(self.tipo_diligencia.modelo_documento.modelo)
-        c = template.Context({'mandado':self.mandado, "diligencia":self})
-        self.documento = t.render(c)
+        if not self.rendered:   #para não desfazer a edição do documento, cria o documento só na primeira vez
+            #super(Diligencia, self).save(*args, **kwargs) # Call the "real" save() method.
+            t = template.Template(self.tipo_diligencia.modelo_documento.modelo)
+            c = template.Context({'mandado':self.mandado, "diligencia":self})
+            self.documento = t.render(c)
+            self.rendered = True
+        self.not_editar_documento = not self.editar_documento
         super(Diligencia, self).save(*args, **kwargs)
 
 
