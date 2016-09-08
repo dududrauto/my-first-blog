@@ -263,6 +263,7 @@ class Tipo_Diligencia(models.Model):
     diligencia_positiva = models.BooleanField(default=False)
     diligencia_parcial = models.BooleanField(default=False)
     diligencia_negativa = models.BooleanField(default=False)
+    diligencia_nao_cumprida = models.BooleanField(default=False)
     diligencia_cumprida = models.BooleanField(default=False)
     endereco_ERRO = models.BooleanField(default=False)
     diligencia_nao_mora = models.BooleanField(default=False)
