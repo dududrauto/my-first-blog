@@ -170,7 +170,7 @@ class MandadoList(generics.ListCreateAPIView):
         for the currently authenticated user.
         """
         user = self.request.user
-        return Mandado.objects.filter(oficial__usuario=user)
+        return Mandado.objects.filter(oficial__usuario=user, status_cumprimento=2)#apenas pendentes
 
 class MandadoDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Mandado.objects.all()

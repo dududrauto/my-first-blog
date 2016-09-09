@@ -151,22 +151,7 @@ class Tipo_DiligenciaSerializer(serializers.ModelSerializer):
             'diligencia_externa',
             'diligencia_coletiva',
         )
-'''
-nome = models.CharField(max_length=50)
-    descricao = models.TextField()
-    modelo_documento = models.ForeignKey(Modelo_Documento, null=True, blank=True)
-    estatus_cumprimento = models.ForeignKey(Estatus_Cumprimento)
-    diligencia_positiva = models.BooleanField(default=False)
-    diligencia_parcial = models.BooleanField(default=False)
-    diligencia_negativa = models.BooleanField(default=False)
-    diligencia_nao_cumprida = models.BooleanField(default=False)
-    diligencia_cumprida = models.BooleanField(default=False)
-    endereco_ERRO = models.BooleanField(default=False)
-    diligencia_nao_mora = models.BooleanField(default=False)
-    verificado_em_loco = models.BooleanField(default=False)
-    diligencia_externa = models.BooleanField(default=False)
-    diligencia_coletiva = models.BooleanField(default=False)
-'''
+
 
 class Estatus_CumprimetoSerializer(serializers.ModelSerializer):
     class Meta:
