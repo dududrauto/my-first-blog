@@ -64,11 +64,20 @@ make_pendente.short_description = "marque os mandados para PENDENTES"
 def make_nao_cumprido(modeladmin, request, queryset):
     queryset.update(status_cumprimento=6)
 make_nao_cumprido.short_description = "marque os mandados para NÃO CUMPRIDO"
-'''
-def make_N(modeladmin, request, queryset):
-    queryset.update(status_cumprimento=4)
-make_N.short_description = "marque os mandados para Normal"
 
+def make_vermelho(modeladmin, request, queryset):
+    queryset.update(cor_urgencia=2)
+make_vermelho.short_description = "marque os mandados para AMARELO"
+
+def make_amarelo(modeladmin, request, queryset):
+    queryset.update(cor_urgencia=2)
+make_amarelo.short_description = "marque os mandados para AMARELO"
+
+def make_verde(modeladmin, request, queryset):
+    queryset.update(cor_urgencia=2)
+make_verde.short_description = "marque os mandados para AMARELO"
+
+'''
 def make_con(modeladmin, request, queryset):
     queryset.update(status_cumprimento=5)
 make_con.short_description = "marque os mandados para com Conducao"
@@ -113,7 +122,7 @@ class MandadoAdmin(admin.ModelAdmin):
             'admin/js/cep.js',
         )
 
-    actions = [make_av, make_pendente, make_nao_cumprido, ]#[export_aviso, make_av, make_dv, make_N, make_URG, make_con, make_cert, make_OfX]
+    actions = [make_av, make_pendente, make_nao_cumprido, make_amarelo, make_verde, make_vermelho, ]#
 
     inlines = [TelefoneInline,]
 
