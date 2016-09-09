@@ -66,16 +66,16 @@ def make_nao_cumprido(modeladmin, request, queryset):
 make_nao_cumprido.short_description = "marque os mandados para NÃO CUMPRIDO"
 
 def make_vermelho(modeladmin, request, queryset):
-    queryset.update(cor_urgencia=2)
-make_vermelho.short_description = "marque os mandados para AMARELO"
+    queryset.update(cor_urgencia=1)
+make_vermelho.short_description = "marque os mandados para VERMELHO"
 
 def make_amarelo(modeladmin, request, queryset):
     queryset.update(cor_urgencia=2)
 make_amarelo.short_description = "marque os mandados para AMARELO"
 
 def make_verde(modeladmin, request, queryset):
-    queryset.update(cor_urgencia=2)
-make_verde.short_description = "marque os mandados para AMARELO"
+    queryset.update(cor_urgencia=3)
+make_verde.short_description = "marque os mandados para VERDE"
 
 '''
 def make_con(modeladmin, request, queryset):
