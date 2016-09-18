@@ -52,7 +52,7 @@ class MyPrint:
                                '<body>' \
                                '<div style="float: none;">' \
                                '<div>'
-                c = template.Context({'mandado':mandados[0], 'atendimento':atendimentos.last()})
+                c = template.Context({'mandado':mandados[0], 'atendimentos':atendimentos})#.last()})
                 t = template.Template(av.modelo)
                 modelo_html += t.render(c)
                 modelo_html += '</div>'
