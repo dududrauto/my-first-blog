@@ -150,7 +150,7 @@ class DiligenciaAdmin(admin.ModelAdmin):
     ordering = ['mandado__numero_mandado']
     search_fields = ['mandado__numero_mandado']
     list_editable = []
-    list_filter = ['editar_documento', 'tipo_diligencia',]
+    list_filter = ['editar_documento', 'imprimir', 'tipo_diligencia',]
     list_max_show_all = 1000
     fieldsets = (
          (None, {#1

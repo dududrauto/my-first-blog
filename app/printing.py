@@ -102,6 +102,7 @@ class MyPrint:
         pdf_html = HTML(string=modelo_html)
         main_doc = pdf_html.render()
         pdf_file = main_doc.write_pdf()
+        diligencias.update(imprimir=False)
         #pdf_file = HTML('http://weasyprint.org/').write_pdf('/tmp/weasyprint-website.pdf')
         return pdf_file  # returns the response.
 
