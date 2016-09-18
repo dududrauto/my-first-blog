@@ -58,7 +58,7 @@ class MyPrint:
                 modelo_html += '</div>'
             else:                                               #avisos intermediarios
                 modelo_html += '<div style="page-break-before:always;">'
-                c = template.Context({'mandado':mandados[i], 'atendimento':atendimentos.last()})
+                c = template.Context({'mandado':mandados[i], 'atendimentos':atendimentos})#.last()})
                 t = template.Template(av.modelo)
                 modelo_html += t.render(c)
                 modelo_html += '</div>'
