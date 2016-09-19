@@ -181,7 +181,7 @@ class DiligenciaAdmin(admin.ModelAdmin):
         if request.user.is_superuser:
             return qs
 
-        return qs.filter(mandado__oficial__usuario=request.user)
+        return qs.filter(mandado__oficial__usuario=request.user, tipo_diligencia__diligencia_cumprida=True)
 
 
 
