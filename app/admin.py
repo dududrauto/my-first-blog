@@ -97,7 +97,7 @@ class MandadoAdmin(admin.ModelAdmin):
                     'conducao', 'status_cumprimento']
     ordering = ['numero_mandado']
     search_fields = ['numero_mandado', 'destinatario', 'rua']
-    list_editable = ['ordem', 'conducao']
+    list_editable = []
     list_filter = ['status_cumprimento', 'audiencia', 'conducao', 'ordem']
     list_max_show_all = 1000
     fieldsets = (
