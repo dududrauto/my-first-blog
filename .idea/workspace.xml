@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bbf4e045-e670-4ec2-8b7c-227d50b2e84d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/admin.py" afterPath="$PROJECT_DIR$/app/admin.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models.py" afterPath="$PROJECT_DIR$/app/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/printing.py" afterPath="$PROJECT_DIR$/app/printing.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="9282e8ca-0bc1-4b2c-bf32-3e79676f8baf" name="New changelist" comment="">
@@ -30,11 +28,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="253" column="83" selection-start-line="253" selection-start-column="83" selection-end-line="253" selection-end-column="83" />
+            <state vertical-scroll-proportion="0.86419755">
+              <caret line="261" column="0" selection-start-line="261" selection-start-column="0" selection-end-line="261" selection-end-column="0" />
               <folding>
                 <element signature="e#15#43#0" expanded="true" />
               </folding>
@@ -74,11 +72,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="admin.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="admin.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/admin.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.46296296">
-              <caret line="152" column="48" selection-start-line="152" selection-start-column="48" selection-end-line="152" selection-end-column="48" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="183" column="107" selection-start-line="183" selection-start-column="107" selection-end-line="183" selection-end-column="107" />
               <folding>
                 <element signature="e#15#47#0" expanded="true" />
               </folding>
@@ -143,9 +141,9 @@
         <option value="$PROJECT_DIR$/app/serializers.py" />
         <option value="$PROJECT_DIR$/app/views.py" />
         <option value="$PROJECT_DIR$/mysite/settings.py" />
-        <option value="$PROJECT_DIR$/app/models.py" />
         <option value="$PROJECT_DIR$/app/printing.py" />
         <option value="$PROJECT_DIR$/app/admin.py" />
+        <option value="$PROJECT_DIR$/app/models.py" />
       </list>
     </option>
   </component>
@@ -483,18 +481,6 @@
       <option name="number" value="Default" />
       <updated>1462839926382</updated>
     </task>
-    <task id="LOCAL-00019" summary="atualizacao">
-      <created>1470095592853</created>
-      <option name="number" value="00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1470095592853</updated>
-    </task>
-    <task id="LOCAL-00020" summary="atualizacao">
-      <created>1470096250568</created>
-      <option name="number" value="00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1470096250569</updated>
-    </task>
     <task id="LOCAL-00021" summary="atualizacao">
       <created>1470096659028</created>
       <option name="number" value="00021" />
@@ -777,7 +763,19 @@
       <option name="project" value="LOCAL" />
       <updated>1474234844199</updated>
     </task>
-    <option name="localTasksCounter" value="68" />
+    <task id="LOCAL-00068" summary="atualizacao">
+      <created>1474242261933</created>
+      <option name="number" value="00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1474242261933</updated>
+    </task>
+    <task id="LOCAL-00069" summary="atualizacao">
+      <created>1474244104186</created>
+      <option name="number" value="00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1474244104186</updated>
+    </task>
+    <option name="localTasksCounter" value="70" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1184,22 +1182,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/models.py">
+    <entry file="file://$PROJECT_DIR$/app/admin.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="253" column="83" selection-start-line="253" selection-start-column="83" selection-end-line="253" selection-end-column="83" />
+          <caret line="183" column="107" selection-start-line="183" selection-start-column="107" selection-end-line="183" selection-end-column="107" />
           <folding>
-            <element signature="e#15#43#0" expanded="true" />
+            <element signature="e#15#47#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/admin.py">
+    <entry file="file://$PROJECT_DIR$/app/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.46296296">
-          <caret line="152" column="48" selection-start-line="152" selection-start-column="48" selection-end-line="152" selection-end-column="48" />
+        <state vertical-scroll-proportion="0.86419755">
+          <caret line="261" column="0" selection-start-line="261" selection-start-column="0" selection-end-line="261" selection-end-column="0" />
           <folding>
-            <element signature="e#15#47#0" expanded="true" />
+            <element signature="e#15#43#0" expanded="true" />
           </folding>
         </state>
       </provider>

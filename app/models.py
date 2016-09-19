@@ -256,6 +256,10 @@ class Diligencia(models.Model):
         self.not_editar_documento = not self.editar_documento
         super(Diligencia, self).save(*args, **kwargs)
 
+    class Meta:
+        verbose_name = "Certidão"
+        verbose_name_plural = "Certidões"
+
 
 class Tipo_Diligencia(models.Model):
     nome = models.CharField(max_length=50)
