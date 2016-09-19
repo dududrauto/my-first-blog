@@ -147,7 +147,7 @@ class MandadoAdmin(admin.ModelAdmin):
 class DiligenciaAdmin(admin.ModelAdmin):
 
     list_display = ['__str__', 'mandado', 'tipo_diligencia', 'data_diligencia', 'not_editar_documento', ]
-    ordering = ['data_diligencia', 'mandado__numero_mandado']
+    ordering = ['-data_diligencia', 'mandado__numero_mandado']
     search_fields = ['mandado__numero_mandado']
     list_editable = []
     list_filter = ['editar_documento', 'imprimir', 'tipo_diligencia',]
