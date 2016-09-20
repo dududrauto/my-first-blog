@@ -6,6 +6,7 @@ from django.template import Context, Template, loader
 from app.printing import MyPrint
 from io import BytesIO
 from django.http import HttpResponse
+from django import forms
 
 class TelefoneInline(admin.TabularInline):
     model = Telefone
@@ -91,8 +92,10 @@ def make_OfX(modeladmin, request, queryset):
 make_OfX.short_description = "transfere para oficial x, provisorio"##provisorio so p nao carregar no ifone...
 '''
 
-class MandadoAdmin(admin.ModelAdmin):
 
+
+
+class MandadoAdmin(admin.ModelAdmin):
     list_display = ['codigo_mandado', 'data', 'audiencia', 'destinatario', 'cidade', 'rua', 'numero', 'ordem',
                     'conducao', 'status_cumprimento']
     ordering = ['numero_mandado']
@@ -100,13 +103,15 @@ class MandadoAdmin(admin.ModelAdmin):
     list_editable = []
     list_filter = ['status_cumprimento', 'audiencia', 'conducao', 'ordem']
     list_max_show_all = 1000
-    fieldsets = (
-         (None, {#1
+    readonly_fields = ('ajustado_mapa', 'verificado_em_loco', )
+    fieldsets = ((None, {#1
                  'classes': ('wide',),
                  'fields': (('numero_mandado', 'destinatario', ),
                             ('cep', 'cidade', 'bairro',),
                             ('rua', 'numero'), 'complemento',
                             ('audiencia', 'status_cumprimento', 'conducao', 'ordem'),
+                            ('position', ),
+                            ('ajustado_mapa',), ('verificado_em_loco',),
                             )}),
          ('Campos Complementares', {
              'classes': ('collapse',),
@@ -134,6 +139,7 @@ class MandadoAdmin(admin.ModelAdmin):
         rua = obj.rua.split(' - ')[0]
         obj.rua = rua
         obj.save()
+
 
     def get_queryset(self, request):
         qs = super(MandadoAdmin, self).get_queryset(request)

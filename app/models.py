@@ -5,6 +5,8 @@ from tinymce.models import HTMLField
 import django
 import datetime
 import django.utils.timezone
+from geoposition.fields import GeopositionField
+import geocoder
 
 # Create your models here.
 
@@ -61,18 +63,29 @@ class Mandado(models.Model):
                                                            ('3', 'verde')), default='1')
     rota = models.IntegerField(default=0)
     owner = models.ForeignKey('auth.User', related_name='mands', null=True, blank=True)
+    position = GeopositionField(help_text='SALVE E CONTINUE EDITANDO, para visualizar posição no mapa!', blank=True, null=True)
+    geo_verificado = models.BooleanField('Localização Verificada', default=False)
 
     def __str__(self):
         return str(self.codigo_mandado)
 
-
-"""
-    def save(self, request=None, *args, **kwargs):
-        self.owner = request.user
-        super(Mandado, self).save(*args, **kwargs) # Call the "real" save() method.
-"""
-
-
+    def save(self, *args, **kwargs):
+        if not self.position and not self.verificado_em_loco:
+            location = "%s, %s, %s, %s, %s" % (self.rua, self.numero, self.cidade, self.estado, self.cep)
+            import geoposition
+            g = geocoder.google(location)   #geocode endereço
+            self.latitude = g.latlng[0]     #salva local
+            self.longitude = g.latlng[1]
+            self.position = geoposition.Geoposition(g.latlng[0], g.latlng[1])   #salva mapa
+        elif (not self.verificado_em_loco) and ((self.latitude != self.position.latitude) or (self.longitude != self.position.longitude)):
+            self.latitude = self.position.latitude
+            self.longitude = self.position.longitude
+            self.ajustado_mapa = True
+        elif self.verificado_em_loco:
+            self.position.latitude = self.latitude
+            self.position.longitude = self.longitude
+            self.ajustado_mapa = False
+        super(Mandado, self).save()
 
 
 '''
