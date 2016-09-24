@@ -56,7 +56,7 @@ class Mandado(models.Model):
                                          ('OK', 'Vinculada'),
                                          ('PAGA', 'Não Vinculada'),
                                          ('NO', 'Não Paga'),))
-    status_cumprimento = models.ForeignKey('Estatus_Cumprimento', null=True, blank=True)  # inserir 1 Recebido
+    status_cumprimento = models.ForeignKey('Estatus_Cumprimento', null=True, blank=True, default= 2)  # inserir 1 Recebido
     cumprimento = models.BooleanField(default=True)  # 1_pendente, 0_cumprido
     cor_urgencia = models.CharField(max_length=2, choices=(('1', 'vermelho'),
                                                            ('2', 'amarelo'),
@@ -343,3 +343,11 @@ class Atendimento(models.Model):
 
     def __str__(self):
         return str(self.oficial)+' Atendimento'+' '+str(self.data)
+
+
+class Relatorio(models.Model):
+    oficial = models.ForeignKey(Oficial, null=True, blank=True)
+    relatorio = models.FileField()
+
+    def __str__(self):
+        return 'Mandados:'+' '+str(self.relatorio)+' '+str(self.oficial)

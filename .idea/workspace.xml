@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bbf4e045-e670-4ec2-8b7c-227d50b2e84d" name="Default" comment="">
+    <list default="true" id="bbf4e045-e670-4ec2-8b7c-227d50b2e84d" name="Default" comment="atualizacao">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/admin.py" afterPath="$PROJECT_DIR$/app/admin.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models.py" afterPath="$PROJECT_DIR$/app/models.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
@@ -32,8 +32,8 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.81557375">
-              <caret line="65" column="102" selection-start-line="65" selection-start-column="102" selection-end-line="65" selection-end-column="102" />
+            <state vertical-scroll-proportion="-8.221312">
+              <caret line="58" column="99" selection-start-line="58" selection-start-column="99" selection-end-line="58" selection-end-column="99" />
               <folding>
                 <element signature="e#15#43#0" expanded="true" />
               </folding>
@@ -77,7 +77,7 @@
         <entry file="file://$PROJECT_DIR$/app/admin.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="105" column="40" selection-start-line="105" selection-start-column="40" selection-end-line="105" selection-end-column="40" />
+              <caret line="294" column="31" selection-start-line="294" selection-start-column="31" selection-end-line="294" selection-end-column="31" />
               <folding>
                 <element signature="e#15#47#0" expanded="true" />
               </folding>
@@ -101,7 +101,7 @@
         <entry file="file://$PROJECT_DIR$/mysite/settings.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="129" column="10" selection-start-line="129" selection-start-column="0" selection-end-line="129" selection-end-column="31" />
+              <caret line="43" column="14" selection-start-line="43" selection-start-column="4" selection-end-line="43" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -180,7 +180,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -321,6 +320,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -481,18 +481,6 @@
       <created>1462839926382</created>
       <option name="number" value="Default" />
       <updated>1462839926382</updated>
-    </task>
-    <task id="LOCAL-00025" summary="atualizacao">
-      <created>1470103035456</created>
-      <option name="number" value="00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1470103035456</updated>
-    </task>
-    <task id="LOCAL-00026" summary="atualizacao">
-      <created>1470103048302</created>
-      <option name="number" value="00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1470103048302</updated>
     </task>
     <task id="LOCAL-00027" summary="atualizacao">
       <created>1470103559867</created>
@@ -776,7 +764,19 @@
       <option name="project" value="LOCAL" />
       <updated>1474250205634</updated>
     </task>
-    <option name="localTasksCounter" value="74" />
+    <task id="LOCAL-00074" summary="atualizacao">
+      <created>1474384292349</created>
+      <option name="number" value="00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1474384292349</updated>
+    </task>
+    <task id="LOCAL-00075" summary="atualizacao">
+      <created>1474387444694</created>
+      <option name="number" value="00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1474387444694</updated>
+    </task>
+    <option name="localTasksCounter" value="76" />
     <servers />
   </component>
   <component name="TodoView">
@@ -797,7 +797,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32565284" sideWeight="0.49739778" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.29800308" sideWeight="0.49739778" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20801233" sideWeight="0.52529764" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.37480798" sideWeight="0.49739778" order="9" side_tool="false" content_ui="tabs" />
@@ -1168,18 +1168,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mysite/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="129" column="10" selection-start-line="129" selection-start-column="0" selection-end-line="129" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/static/admin/js/cep.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.6454918">
           <caret line="21" column="14" selection-start-line="21" selection-start-column="14" selection-end-line="21" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mysite/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="43" column="14" selection-start-line="43" selection-start-column="4" selection-end-line="43" selection-end-column="18" />
           <folding />
         </state>
       </provider>
@@ -1187,7 +1186,7 @@
     <entry file="file://$PROJECT_DIR$/app/admin.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="105" column="40" selection-start-line="105" selection-start-column="40" selection-end-line="105" selection-end-column="40" />
+          <caret line="294" column="31" selection-start-line="294" selection-start-column="31" selection-end-line="294" selection-end-column="31" />
           <folding>
             <element signature="e#15#47#0" expanded="true" />
           </folding>
@@ -1196,8 +1195,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.81557375">
-          <caret line="65" column="102" selection-start-line="65" selection-start-column="102" selection-end-line="65" selection-end-column="102" />
+        <state vertical-scroll-proportion="-8.221312">
+          <caret line="58" column="99" selection-start-line="58" selection-start-column="99" selection-end-line="58" selection-end-column="99" />
           <folding>
             <element signature="e#15#43#0" expanded="true" />
           </folding>

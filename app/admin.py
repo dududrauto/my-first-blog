@@ -217,6 +217,12 @@ class AtendimentoAdmin(admin.ModelAdmin):
         return qs.filter(oficial=oj, data__gt=datetime_safe.date.today())
 
 '''
+class RelatorioAdmin(admin.ModelAdmin):
+    def save_model(self, request, obj, form, change):
+'''
+
+
+'''
 class AvisoAdmin(admin.ModelAdmin):
 #    inlines = [AtendimentoInline]
 
@@ -286,4 +292,5 @@ admin.site.register(Vara)
 admin.site.register(Atendimento, AtendimentoAdmin)
 #admin.site.register(Foto)
 #admin.site.register(Audio)
+admin.site.register(Relatorio)#, RelatorioAdmin)
 
