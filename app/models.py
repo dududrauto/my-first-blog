@@ -349,5 +349,6 @@ class Relatorio(models.Model):
     oficial = models.ForeignKey(Oficial, null=True, blank=True)
     relatorio = models.FileField()
 
+
     def __str__(self):
         return 'Mandados:'+' '+str(self.relatorio)+' '+str(self.oficial)
