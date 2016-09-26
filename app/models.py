@@ -81,9 +81,10 @@ class Mandado(models.Model):
                     self.position = geoposition.Geoposition(g.latlng[0], g.latlng[1])   #salva mapa
                 except:
                     #g = geocoder.google("contabilista vitor brum, alvorada")
-                    self.latitude = '-30.000759926186433'     #salva local
-                    self.longitude = '-51.07626275297855'
-                    self.position = geoposition.Geoposition(self.latitude, self.longitude)
+                    #self.latitude = '-30.000759926186433'     #salva local
+                    #self.longitude = '-51.07626275297855'
+                    #self.position = geoposition.Geoposition(self.latitude, self.longitude)
+                    pass
             elif (not self.verificado_em_loco) and ((self.latitude != self.position.latitude) or (self.longitude != self.position.longitude)):
                 self.latitude = self.position.latitude
                 self.longitude = self.position.longitude
