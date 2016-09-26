@@ -79,6 +79,7 @@ class Mandado(models.Model):
                     self.latitude = g.latlng[0]     #salva local
                     self.longitude = g.latlng[1]
                     self.position = geoposition.Geoposition(g.latlng[0], g.latlng[1])   #salva mapa
+                    self.ajustado_mapa = True
                 except:
                     #g = geocoder.google("contabilista vitor brum, alvorada")
                     #self.latitude = '-30.000759926186433'     #salva local
