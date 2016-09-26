@@ -13,6 +13,43 @@ class TelefoneInline(admin.TabularInline):
     extra = 1
 
 
+#######################
+def make_add_rel(modeladmin, request, queryset):
+    x = queryset[0].relatorio
+    b=open(x._get_url(), 'r')
+    relatorio = b.read().splitlines()
+    b.close()
+    x.close()
+    for mm in relatorio[1:]:
+        mm = str(mm)
+        mm=mm.split(';')
+        mandado = Mandado()
+        data_str = mm[0].replace("b'", "")
+        day, month, year = data_str.split('/')
+        mandado.data = datetime.date(int(year)+2000, int(month), int(day))
+        mandado.numero_mandado = int(mm[1])
+        mandado.destinatario = mm[2].upper()
+        mandado.rua = 'RUA '+mm[3].upper()
+        mandado.numero = mm[4]
+        mandado.cidade = 'Alvorada'
+        try:
+            day, month, year = mm[5].split('/')
+            mandado.audiencia = datetime.date(int(year)+2000, int(month), int(day))
+        except:
+            pass
+        mandado.ordem = Ordem.objects.get(id=2)#id=int(mm[6]))
+        mandado.owner = request.user
+        mandado.oficial = queryset[0].oficial
+        mandado.codigo_mandado = '003/'+str(mandado.data.year)+'/'+str(mandado.numero_mandado)
+        mandado.geo_verificado = False
+        mandado.save()
+        #print(mandado)
+        #print(mandado.latitude)
+
+make_add_rel.short_description = "incluir relatorio"
+
+
+#######################
 def export_aviso(modeladmin, request, queryset):
     f=open('testeefile.csv', 'w')
     for m in queryset:
@@ -216,10 +253,9 @@ class AtendimentoAdmin(admin.ModelAdmin):
 
         return qs.filter(oficial=oj, data__gt=datetime_safe.date.today())
 
-'''
+
 class RelatorioAdmin(admin.ModelAdmin):
-    def save_model(self, request, obj, form, change):
-'''
+    actions = [make_add_rel, ]#
 
 
 '''
@@ -292,5 +328,5 @@ admin.site.register(Vara)
 admin.site.register(Atendimento, AtendimentoAdmin)
 #admin.site.register(Foto)
 #admin.site.register(Audio)
-admin.site.register(Relatorio)#, RelatorioAdmin)
+admin.site.register(Relatorio, RelatorioAdmin)
 

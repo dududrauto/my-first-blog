@@ -70,27 +70,29 @@ class Mandado(models.Model):
         return str(self.codigo_mandado)
 
     def save(self, *args, **kwargs):
-        if not self.position and not self.verificado_em_loco:
-            location = "%s, %s, %s, %s, %s" % (self.rua, self.numero, self.cidade, self.estado, self.cep)
-            import geoposition
-            g = geocoder.google(location)   #geocode endereço
-            try:
-                self.latitude = g.latlng[0]     #salva local
-                self.longitude = g.latlng[1]
-            except:
-                g = geocoder.google("contabilista vitor brum, alvorada")
-                self.latitude = g.latlng[0]     #salva local
-                self.longitude = g.latlng[1]
+        if not self.geo_verificado:
+            if not self.position and not self.verificado_em_loco:
+                location = "%s, %s, %s, %s, %s" % (self.rua, self.numero, self.cidade, self.estado, self.cep)
+                import geoposition
+                g = geocoder.google(location)   #geocode endereço
+                try:
+                    self.latitude = g.latlng[0]     #salva local
+                    self.longitude = g.latlng[1]
+                except:
+                    g = geocoder.google("contabilista vitor brum, alvorada")
+                    self.latitude = g.latlng[0]     #salva local
+                    self.longitude = g.latlng[1]
 
-            self.position = geoposition.Geoposition(g.latlng[0], g.latlng[1])   #salva mapa
-        elif (not self.verificado_em_loco) and ((self.latitude != self.position.latitude) or (self.longitude != self.position.longitude)):
-            self.latitude = self.position.latitude
-            self.longitude = self.position.longitude
-            self.ajustado_mapa = True
-        elif self.verificado_em_loco:
-            self.position.latitude = self.latitude
-            self.position.longitude = self.longitude
-            self.ajustado_mapa = False
+                self.position = geoposition.Geoposition(g.latlng[0], g.latlng[1])   #salva mapa
+            elif (not self.verificado_em_loco) and ((self.latitude != self.position.latitude) or (self.longitude != self.position.longitude)):
+                self.latitude = self.position.latitude
+                self.longitude = self.position.longitude
+                self.ajustado_mapa = True
+            elif self.verificado_em_loco:
+                self.position.latitude = self.latitude
+                self.position.longitude = self.longitude
+                self.ajustado_mapa = False
+        self.geo_verificado = False
         super(Mandado, self).save()
 
 
