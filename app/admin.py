@@ -37,7 +37,7 @@ def make_add_rel(modeladmin, request, queryset):
             mandado.audiencia = datetime.date(int(year)+2000, int(month), int(day))
         except:
             pass
-        mandado.ordem = Ordem.objects.get(id=2)#id=int(mm[6]))
+        mandado.ordem = Ordem.objects.get(id=int(mm[6]))
         mandado.owner = request.user
         mandado.oficial = queryset[0].oficial
         mandado.codigo_mandado = '003/'+str(mandado.data.year)+'/'+str(mandado.numero_mandado)
