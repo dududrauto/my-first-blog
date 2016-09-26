@@ -42,7 +42,10 @@ def make_add_rel(modeladmin, request, queryset):
         mandado.oficial = queryset[0].oficial
         mandado.codigo_mandado = '003/'+str(mandado.data.year)+'/'+str(mandado.numero_mandado)
         mandado.geo_verificado = False
-        mandado.save()
+        try:
+            mandado.save()
+        except:
+            pass
         #print(mandado)
         #print(mandado.latitude)
 
