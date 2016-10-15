@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bbf4e045-e670-4ec2-8b7c-227d50b2e84d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/admin.py" afterPath="$PROJECT_DIR$/app/admin.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models.py" afterPath="$PROJECT_DIR$/app/models.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -32,8 +31,8 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.35185185">
-              <caret line="81" column="45" selection-start-line="81" selection-start-column="45" selection-end-line="81" selection-end-column="45" />
+            <state vertical-scroll-proportion="1.5432099">
+              <caret line="50" column="48" selection-start-line="50" selection-start-column="48" selection-end-line="50" selection-end-column="48" />
               <folding>
                 <element signature="e#15#43#0" expanded="true" />
               </folding>
@@ -143,8 +142,8 @@
         <option value="$PROJECT_DIR$/app/views.py" />
         <option value="$PROJECT_DIR$/app/printing.py" />
         <option value="$PROJECT_DIR$/mysite/settings.py" />
-        <option value="$PROJECT_DIR$/app/models.py" />
         <option value="$PROJECT_DIR$/app/admin.py" />
+        <option value="$PROJECT_DIR$/app/models.py" />
       </list>
     </option>
   </component>
@@ -482,12 +481,6 @@
       <option name="number" value="Default" />
       <updated>1462839926382</updated>
     </task>
-    <task id="LOCAL-00035" summary="atualizacao">
-      <created>1470671540001</created>
-      <option name="number" value="00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1470671540001</updated>
-    </task>
     <task id="LOCAL-00036" summary="atualizacao">
       <created>1470671992483</created>
       <option name="number" value="00036" />
@@ -776,7 +769,13 @@
       <option name="project" value="LOCAL" />
       <updated>1474916042714</updated>
     </task>
-    <option name="localTasksCounter" value="84" />
+    <task id="LOCAL-00084" summary="atualizacao">
+      <created>1474916698505</created>
+      <option name="number" value="00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1474916698505</updated>
+    </task>
+    <option name="localTasksCounter" value="85" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1195,8 +1194,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.35185185">
-          <caret line="81" column="45" selection-start-line="81" selection-start-column="45" selection-end-line="81" selection-end-column="45" />
+        <state vertical-scroll-proportion="1.5432099">
+          <caret line="50" column="48" selection-start-line="50" selection-start-column="48" selection-end-line="50" selection-end-column="48" />
           <folding>
             <element signature="e#15#43#0" expanded="true" />
           </folding>

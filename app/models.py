@@ -48,7 +48,7 @@ class Mandado(models.Model):
     oficial = models.ForeignKey('Oficial', related_name='mandados',
                                 help_text='Se em em branco, preenche automaticamente com o usuario atual.', null=True,
                                 blank=True)
-    ordem = models.ForeignKey('Ordem', default=2, null=True, blank=True,
+    ordem = models.ForeignKey('Ordem', default=1, null=True, blank=True,
                               help_text='Citacao, Intimacao, Penhora, Avaliacao, Busca e Ap, etc...')
     audiencia = models.DateField(blank=True, null=True)
     conducao = models.CharField(verbose_name='Condução', max_length=4, blank=True, null=True, default='AJG',
@@ -60,7 +60,7 @@ class Mandado(models.Model):
     cumprimento = models.BooleanField(default=True)  # 1_pendente, 0_cumprido
     cor_urgencia = models.CharField(max_length=2, choices=(('1', 'vermelho'),
                                                            ('2', 'amarelo'),
-                                                           ('3', 'verde')), default='1')
+                                                           ('3', 'verde')), default='2')
     rota = models.IntegerField(default=0)
     owner = models.ForeignKey('auth.User', related_name='mands', null=True, blank=True)
     position = GeopositionField(help_text='SALVE E CONTINUE EDITANDO, para visualizar posição no mapa!', blank=True, null=True)
