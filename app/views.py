@@ -153,8 +153,9 @@ class DiligenciasMandado(APIView):
     """
     def get(self, request, pk, format=None):
         snippet = Diligencia.objects.filter(mandado__id=pk)
-        serializer = DiligenciaSerializer(snippet)
+        serializer = DiligenciaSerializer(snippet, many=True)
         return Response(serializer.data)
+
 ##########
 '''
 class EnderecoList(generics.ListCreateAPIView):
