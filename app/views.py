@@ -16,6 +16,10 @@ from app.printing import MyPrint
 from io import BytesIO
 from django.http import HttpResponse
 
+from django.http import Http404
+from rest_framework.views import APIView
+from rest_framework.response import Response
+
 
 def print_users(request):
     '''
@@ -134,6 +138,23 @@ class DiligenciaDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = DiligenciaSerializer
     permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly,)
 
+
+##########
+class DiligenciasMandado(APIView):
+    """
+    Retrieve, update or delete a snippet instance.
+    """
+    def get_object(self, id):
+        try:
+            return Diligencia.objects.filter(mandado__id=id)
+        except Diligencia.DoesNotExist:
+            raise Http404
+
+    def get(self, request, id, format=None):
+        snippet = self.get_object(id)
+        serializer = DiligenciaSerializer(snippet)
+        return Response(serializer.data)
+##########
 '''
 class EnderecoList(generics.ListCreateAPIView):
     queryset = Endereco.objects.all()
