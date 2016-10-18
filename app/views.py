@@ -144,16 +144,8 @@ class DiligenciasMandado(APIView):
     """
     Retrieve, update or delete a snippet instance.
     """
-    def get_object(self, pk):
-        try:
-            return Diligencia.objects.filter(mandado__id=pk)
-        except Diligencia.DoesNotExist:
-            raise Http404
-
-    def get(self, request, pk, format=None):
-        snippet = self.get_object(pk)
-        serializer = DiligenciaSerializer(snippet)
-        return Response(serializer.data)
+    def get_queryset(self, pk):
+        return Diligencia.objects.filter(mandado__id=pk)
 ##########
 '''
 class EnderecoList(generics.ListCreateAPIView):
