@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bbf4e045-e670-4ec2-8b7c-227d50b2e84d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views.py" afterPath="$PROJECT_DIR$/app/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="9282e8ca-0bc1-4b2c-bf32-3e79676f8baf" name="New changelist" comment="">
@@ -491,12 +490,6 @@
       <option name="number" value="Default" />
       <updated>1462839926382</updated>
     </task>
-    <task id="LOCAL-00041" summary="atualizacao">
-      <created>1470710920066</created>
-      <option name="number" value="00041" />
-      <option name="project" value="LOCAL" />
-      <updated>1470710920066</updated>
-    </task>
     <task id="LOCAL-00042" summary="atualizacao">
       <created>1470711174556</created>
       <option name="number" value="00042" />
@@ -785,7 +778,13 @@
       <option name="project" value="LOCAL" />
       <updated>1476818074117</updated>
     </task>
-    <option name="localTasksCounter" value="90" />
+    <task id="LOCAL-00090" summary="atualizacao">
+      <created>1476818444266</created>
+      <option name="number" value="00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1476818444266</updated>
+    </task>
+    <option name="localTasksCounter" value="91" />
     <servers />
   </component>
   <component name="TodoView">
@@ -799,7 +798,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1" y="23" width="1365" height="741" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20801233" sideWeight="0.4747024" order="7" side_tool="false" content_ui="tabs" />
