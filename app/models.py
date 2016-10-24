@@ -67,7 +67,7 @@ class Mandado(models.Model):
     geo_verificado = models.BooleanField('Localização Verificada', default=False)
 
     def __str__(self):
-        return str(self.codigo_mandado)
+        return str(self.numero_mandado)
 
     def save(self, *args, **kwargs):
         if not self.geo_verificado:
