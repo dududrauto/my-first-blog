@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bbf4e045-e670-4ec2-8b7c-227d50b2e84d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/admin.py" afterPath="$PROJECT_DIR$/app/admin.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views.py" afterPath="$PROJECT_DIR$/app/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="9282e8ca-0bc1-4b2c-bf32-3e79676f8baf" name="New changelist" comment="">
@@ -508,12 +506,6 @@
       <option name="number" value="Default" />
       <updated>1462839926382</updated>
     </task>
-    <task id="LOCAL-00045" summary="atualizacao">
-      <created>1471269217630</created>
-      <option name="number" value="00045" />
-      <option name="project" value="LOCAL" />
-      <updated>1471269217630</updated>
-    </task>
     <task id="LOCAL-00046" summary="atualizacao">
       <created>1472385625068</created>
       <option name="number" value="00046" />
@@ -802,7 +794,13 @@
       <option name="project" value="LOCAL" />
       <updated>1477311790043</updated>
     </task>
-    <option name="localTasksCounter" value="94" />
+    <task id="LOCAL-00094" summary="atualizacao">
+      <created>1477311869269</created>
+      <option name="number" value="00094" />
+      <option name="project" value="LOCAL" />
+      <updated>1477311869269</updated>
+    </task>
+    <option name="localTasksCounter" value="95" />
     <servers />
   </component>
   <component name="TodoView">
