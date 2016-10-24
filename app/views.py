@@ -139,24 +139,18 @@ class DiligenciaDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly,)
 
 
-##########
+
 class DiligenciasMandado(APIView):
     """
     Retrieve, update or delete a snippet instance.
     """
-    """
-    def get_object(self, pk):
-        try:
-            return Diligencia.objects.filter(mandado__id=pk)
-        except Diligencia.DoesNotExist:
-            raise Http404
-    """
+
     def get(self, request, pk, format=None):
         snippet = Diligencia.objects.filter(mandado__id=pk)
         serializer = DiligenciaSerializer(snippet, many=True)
         return Response(serializer.data)
 
-##########
+
 '''
 class EnderecoList(generics.ListCreateAPIView):
     queryset = Endereco.objects.all()

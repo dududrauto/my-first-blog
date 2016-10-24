@@ -136,7 +136,7 @@ make_OfX.short_description = "transfere para oficial x, provisorio"##provisorio 
 
 
 class MandadoAdmin(admin.ModelAdmin):
-    list_display = ['codigo_mandado', 'ajustado_mapa', 'data', 'audiencia', 'destinatario', 'cidade', 'rua', 'numero', 'ordem',
+    list_display = ['numero_mandado', 'ajustado_mapa', 'data', 'audiencia', 'destinatario', 'cidade', 'rua', 'numero', 'ordem',
                     'conducao', 'status_cumprimento']
     ordering = ['numero_mandado']
     search_fields = ['numero_mandado', 'destinatario', 'rua']
@@ -192,7 +192,7 @@ class MandadoAdmin(admin.ModelAdmin):
 
 class DiligenciaAdmin(admin.ModelAdmin):
 
-    list_display = ['__str__', 'mandado', 'tipo_diligencia', 'data_diligencia', 'not_editar_documento', ]
+    list_display = ['mandado__numero_mandado', '__str__', 'data_diligencia', 'hora_diligencia', 'not_editar_documento', ]
     ordering = ['-data_diligencia', 'mandado__numero_mandado']
     search_fields = ['mandado__numero_mandado']
     list_editable = []
