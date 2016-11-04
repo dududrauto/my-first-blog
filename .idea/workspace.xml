@@ -86,7 +86,7 @@
         <entry file="file://$PROJECT_DIR$/app/admin.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.44665012">
-              <caret line="58" column="169" selection-start-line="58" selection-start-column="169" selection-end-line="58" selection-end-column="169" />
+              <caret line="58" column="90" selection-start-line="58" selection-start-column="90" selection-end-line="58" selection-end-column="90" />
               <folding>
                 <element signature="e#15#47#0" expanded="true" />
               </folding>
@@ -437,12 +437,6 @@
       <option name="number" value="Default" />
       <updated>1462839926382</updated>
     </task>
-    <task id="LOCAL-00053" summary="atualizacao">
-      <created>1473189015083</created>
-      <option name="number" value="00053" />
-      <option name="project" value="LOCAL" />
-      <updated>1473189015083</updated>
-    </task>
     <task id="LOCAL-00054" summary="atualizacao">
       <created>1473195577498</created>
       <option name="number" value="00054" />
@@ -731,7 +725,13 @@
       <option name="project" value="LOCAL" />
       <updated>1478285996003</updated>
     </task>
-    <option name="localTasksCounter" value="102" />
+    <task id="LOCAL-00102" summary="atualizacao">
+      <created>1478286150358</created>
+      <option name="number" value="00102" />
+      <option name="project" value="LOCAL" />
+      <updated>1478286150358</updated>
+    </task>
+    <option name="localTasksCounter" value="103" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1152,7 +1152,7 @@
     <entry file="file://$PROJECT_DIR$/app/admin.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.44665012">
-          <caret line="58" column="169" selection-start-line="58" selection-start-column="169" selection-end-line="58" selection-end-column="169" />
+          <caret line="58" column="90" selection-start-line="58" selection-start-column="90" selection-end-line="58" selection-end-column="90" />
           <folding>
             <element signature="e#15#47#0" expanded="true" />
           </folding>
