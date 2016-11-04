@@ -167,7 +167,7 @@ class MandadoAdmin(admin.ModelAdmin):
             'admin/js/cep.js',
         )
 
-    actions = [make_av, make_pendente, make_nao_cumprido, make_amarelo, make_verde, make_vermelho, ]#
+    actions = [make_av, make_pendente, make_nao_cumprido, make_amarelo, make_verde, make_vermelho, export_aviso]#
 
     inlines = [TelefoneInline,]
 
