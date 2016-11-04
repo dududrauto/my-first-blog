@@ -56,7 +56,7 @@ make_add_rel.short_description = "incluir relatorio"
 def export_aviso(modeladmin, request, queryset):
     f=open(str(request.user)+"_"+'relatorio.csv', 'w')
     for m in queryset:
-        strr=u';'+u';'+m.numero_mandado+u';'+m.audiencia+u';'+m.destinatario+u';'+m.rua+u';'+m.numero_rua+u';'+m.bairro+u';'+m.complemento+u';'+u'\n'
+        strr=u';'+u';'+str(m.numero_mandado)+u';'+str(m.audiencia)+u';'+str(m.destinatario)+u';'+str(m.rua)+u';'+str(m.numero_rua)+u';'+m.bairro+u';'+m.complemento+u';'+u'\n'
         safe = strr#unicodedata.normalize('NFKD', strr).encode('ascii', 'ignore')
         f.write(safe)
     f.close()
