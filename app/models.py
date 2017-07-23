@@ -307,7 +307,7 @@ class Tipo_Diligencia(models.Model):
 class Comarca(models.Model):
     nome = models.CharField(max_length=50)
     cod_comarca = models.CharField(max_length=5)
-    #endereco = models.ForeignKey(Endereco, null=True, blank=True)
+    endereco = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return str(self.nome)
