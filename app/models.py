@@ -60,7 +60,8 @@ class Mandado(models.Model):
     cumprimento = models.BooleanField(default=True)  # 1_pendente, 0_cumprido
     cor_urgencia = models.CharField(max_length=2, choices=(('1', 'vermelho'),
                                                            ('2', 'amarelo'),
-                                                           ('3', 'verde')), default='2')
+                                                           ('3', 'verde'),
+                                                           ('4', 'azul')), default='2')
     rota = models.IntegerField(default=0)
     owner = models.ForeignKey('auth.User', related_name='mands', null=True, blank=True)
     position = GeopositionField(help_text='SALVE E CONTINUE EDITANDO, para visualizar posição no mapa!', blank=True, null=True)
