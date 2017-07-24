@@ -201,7 +201,7 @@ class Oficial(models.Model):
         verbose_name_plural = 'Oficiais'
 
     usuario = models.OneToOneField(User)
-    telefone = models.DecimalField(max_digits=10, decimal_places=0, )
+    telefone = models.DecimalField(max_digits=11, decimal_places=0, )
     email = models.EmailField(null=True, blank=True)
     cpf = models.CharField(max_length=11, default='12345678901')
     #endereco = models.ForeignKey(Endereco, null=True, blank=True)
