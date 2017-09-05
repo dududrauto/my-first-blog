@@ -3,7 +3,7 @@ __author__ = 'Dudu'
 from django.forms import widgets
 from rest_framework import serializers
 from app.models import Mandado, Oficial, Telefone, Diligencia, Tipo_Diligencia,\
-    Estatus_Cumprimento, Foto, Audio, Vara, Comarca, Ordem
+    Estatus_Cumprimento, Foto, Audio, Vara, Comarca, Ordem, Json_sync
 from django.contrib.auth.models import User
 
 
@@ -212,4 +212,14 @@ class AudioSerializer(serializers.ModelSerializer):
             'diligencia',
             'descricao',
             'audio',
+        )
+
+class Json_syncSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Json_sync
+        fields = (
+            #'oficial',
+            #'datetime',
+            'json',
+            #'aplicado',
         )

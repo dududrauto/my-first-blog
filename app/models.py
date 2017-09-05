@@ -354,6 +354,16 @@ class Relatorio(models.Model):
     oficial = models.ForeignKey(Oficial, null=True, blank=True)
     relatorio = models.FileField()
 
-
     def __str__(self):
         return 'Mandados:'+' '+str(self.relatorio)+' '+str(self.oficial)
+
+
+# para armazenar os arquivos de sincronização
+class Json_sync(models.Model):
+    oficial = models.ForeignKey(Oficial, blank=True, null=True)  # blank and null temporários
+    datetime = models.DateTimeField(blank=True, null=True)  #blank and null temporários
+    json = models.TextField()
+    aplicado = models.BooleanField(default=False)
+
+    def __str__(self):
+        return str(self.oficial)+' '+str(datetime)
