@@ -133,6 +133,12 @@ class DiligenciaList(generics.ListCreateAPIView):
     serializer_class = DiligenciaSerializer
     permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly,)
 
+    def get_serializer(self, *args, **kwargs):
+        """ if an array is passed, set serializer to many """
+        if isinstance(kwargs.get('data', {}), list):
+            kwargs['many'] = True
+        return super(DiligenciaList, self).get_serializer(*args, **kwargs)
+
 
 class DiligenciaDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Diligencia.objects.all()
@@ -178,6 +184,12 @@ class MandadoList(generics.ListCreateAPIView):
     serializer_class = MandadoSerializer
     permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly,)
     #permission_classes = (permissions.IsAuthenticated,) #.IsAuthenticatedOrReadOnly,)
+
+    def get_serializer(self, *args, **kwargs):
+        """ if an array is passed, set serializer to many """
+        if isinstance(kwargs.get('data', {}), list):
+            kwargs['many'] = True
+        return super(MandadoList, self).get_serializer(*args, **kwargs)
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
