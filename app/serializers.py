@@ -5,13 +5,19 @@ from rest_framework import serializers
 from app.models import Mandado, Oficial, Telefone, Diligencia, Tipo_Diligencia,\
     Estatus_Cumprimento, Foto, Audio, Vara, Comarca, Ordem, Json_sync
 from django.contrib.auth.models import User
+from rest_framework_bulk import (
+    BulkListSerializer,
+    BulkSerializerMixin,
+    ListBulkCreateUpdateDestroyAPIView,
+)
 
 
-class MandadoSerializer(serializers.ModelSerializer):
+class MandadoSerializer(BulkSerializerMixin, serializers.ModelSerializer):
     oficial = serializers.ReadOnlyField(source='oficial.usuario.username')
 
     class Meta:
         model = Mandado
+        list_serializer_class = BulkListSerializer
         fields = (
             'id',
             'comarca',#

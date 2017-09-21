@@ -133,6 +133,14 @@ class DiligenciaList(generics.ListCreateAPIView):
     serializer_class = DiligenciaSerializer
     permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly,)
 
+    def perform_create(self, serializer):
+        diligencias = super(DiligenciaList, self).perform_create(serializer)
+        for item in serializer.data:
+            tipo = Tipo_Diligencia.objects.get(id=item['tipo_diligencia'])
+            mandado = Mandado.objects.get(id=item['mandado'])
+            mandado.status_cumprimento = tipo.estatus_cumprimento
+            mandado.save()
+
     def get_serializer(self, *args, **kwargs):
         """ if an array is passed, set serializer to many """
         if isinstance(kwargs.get('data', {}), list):
@@ -207,6 +215,21 @@ class MandadoDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = MandadoSerializer
     #permission_classes = (permissions.IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly,)
     permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly,)
+
+    # def update(self, request, *args, **kwargs):
+    #     partial = kwargs.pop('partial', False)
+    #     instance = self.get_object()
+    #     serializer = self.get_serializer(instance, data=request.data, partial=partial)
+    #     for item in serializer.initial_data:
+    #         # item.is_valid(raise_exception=True)
+    #         self.perform_update(item)
+    #     return Response(serializer.initial_data)
+
+    # def get_serializer(self, *args, **kwargs):
+    #     """ if an array is passed, set serializer to many """
+    #     if isinstance(kwargs.get('data', {}), list):
+    #         kwargs['many'] = True
+    #     return super(MandadoDetail, self).get_serializer(*args, **kwargs)
 
 
 class TelefoneList(generics.ListCreateAPIView):
