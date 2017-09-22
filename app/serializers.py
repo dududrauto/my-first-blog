@@ -4,7 +4,7 @@ from django.forms import widgets
 from rest_framework import serializers
 from app.models import Mandado, Oficial, Telefone, Diligencia, Tipo_Diligencia,\
     Estatus_Cumprimento, Foto, Audio, Vara, Comarca, Ordem, Json_sync
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from rest_framework_bulk import (
     BulkListSerializer,
     BulkSerializerMixin,
@@ -219,12 +219,21 @@ class AudioSerializer(serializers.ModelSerializer):
             'audio',
         )
 
-class Json_syncSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.HyperlinkedModelSerializer):
+    snippets = serializers.HyperlinkedRelatedField(many=True, view_name='snippet-detail', read_only=True)
+
     class Meta:
-        model = Json_sync
-        fields = (
-            #'oficial',
-            #'datetime',
-            'json',
-            #'aplicado',
-        )
+        model = User
+        fields = ('id','url', 'username', 'first_name', 'last_name', 'is_staff', 'is_active', 'is_superuser', 'snippets', 'password', 'email')
+
+    def create(self, validated_data):
+        # colocar aqui as configurações do usuario que quero, ver a parte dos grupos e fazer oficial sempre
+        user = super(UserSerializer, self).create(validated_data)
+        user.set_password(validated_data['password'])
+        user.is_active = True
+        user.is_staff = True
+        user.is_superuser = False
+        user.groups.set([Group.objects.get(name='Oficial'),])
+
+        user.save()
+        return user

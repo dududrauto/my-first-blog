@@ -33,8 +33,8 @@ urlpatterns = patterns('',
                        url(r'^foto/(?P<pk>[0-9]+)/$', views.FotoDetail.as_view()),
                        url(r'^audio/$', views.AudioList.as_view()),
                        url(r'^audio/(?P<pk>[0-9]+)/$', views.AudioDetail.as_view()),
-                       url(r'^json_sync/$', views.Json_syncList.as_view()),
-                       url(r'^json_sync/(?P<pk>[0-9]+)/$', views.Json_syncDetail.as_view()),
+                       url(r'^users/$', views.UserList.as_view()),
+                       url(r'^users/(?P<pk>[0-9]+)/$', views.UserDetail.as_view()),
                        url(r'^pdf/$', views.print_users),
 
                        )

@@ -5,7 +5,7 @@ from app.models import Mandado, Oficial, Telefone, Diligencia, Tipo_Diligencia, 
     Foto, Audio, Comarca, Vara, Ordem, Json_sync
 from app.serializers import MandadoSerializer, OficialSerializer, TelefoneSerializer,\
     DiligenciaSerializer, Tipo_DiligenciaSerializer, Estatus_CumprimetoSerializer, FotoSerializer, AudioSerializer, \
-    VaraSerializer, ComarcaSerializer, OrdemSerializer, Json_syncSerializer
+    VaraSerializer, ComarcaSerializer, OrdemSerializer, UserSerializer
 from rest_framework import generics
 from django.contrib.auth.models import User
 from rest_framework import permissions
@@ -267,18 +267,15 @@ class OficialDetail(generics.RetrieveAPIView):
     permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly,)
 
 
-#sincronização json_sync
-class Json_syncList(generics.ListCreateAPIView):
-    queryset = Json_sync.objects.all()
-    serializer_class = Json_syncSerializer
+class UserList(generics.ListCreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
     permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly,)
 
-
-class Json_syncDetail(generics.RetrieveAPIView):
-    queryset = Json_sync.objects.all()
-    serializer_class = Json_syncSerializer
+class UserDetail(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
     permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly,)
-
 
 
 
