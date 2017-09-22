@@ -68,7 +68,6 @@ class OficialSerializer(serializers.ModelSerializer):
             'telefone',
             'email',
             'cpf',
-            'endereco',
             'comarca',
             'mandados',
         )

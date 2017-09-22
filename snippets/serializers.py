@@ -17,7 +17,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = User
-        fields = ('url', 'username', 'first_name', 'last_name', 'is_staff', 'is_active', 'is_superuser', 'snippets', 'password', 'email')
+        fields = ('id','url', 'username', 'first_name', 'last_name', 'is_staff', 'is_active', 'is_superuser', 'snippets', 'password', 'email')
 
     def create(self, validated_data):
         # colocar aqui as configurações do usuario que quero, ver a parte dos grupos e fazer oficial sempre

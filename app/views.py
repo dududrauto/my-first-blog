@@ -255,7 +255,7 @@ class TelefoneDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly,)
 
 
-class OficialList(generics.ListAPIView):
+class OficialList(generics.ListCreateAPIView):
     queryset = Oficial.objects.all()
     serializer_class = OficialSerializer
     permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly,)
