@@ -185,6 +185,7 @@ class ComarcaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comarca
         fields = (
+            'id',
             'nome',
             'cod_comarca',
             'endereco',
