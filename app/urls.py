@@ -35,6 +35,8 @@ urlpatterns = patterns('',
                        url(r'^audio/(?P<pk>[0-9]+)/$', views.AudioDetail.as_view()),
                        url(r'^users/$', views.UserList.as_view()),
                        url(r'^users/(?P<pk>[0-9]+)/$', views.UserDetail.as_view()),
+                       url(r'^version/$', views.VersionList.as_view()),
+                       url(r'^version/(?P<pk>[0-9]+)/$', views.VersionDetail.as_view()),
                        url(r'^pdf/$', views.print_users),
 
                        )

@@ -331,4 +331,5 @@ admin.site.register(Atendimento, AtendimentoAdmin)
 #admin.site.register(Foto)
 #admin.site.register(Audio)
 admin.site.register(Relatorio, RelatorioAdmin)
+admin.site.register(Version)
 

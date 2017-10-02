@@ -3,7 +3,7 @@ __author__ = 'Dudu'
 from django.forms import widgets
 from rest_framework import serializers
 from app.models import Mandado, Oficial, Telefone, Diligencia, Tipo_Diligencia,\
-    Estatus_Cumprimento, Foto, Audio, Vara, Comarca, Ordem, Json_sync
+    Estatus_Cumprimento, Foto, Audio, Vara, Comarca, Ordem, Version
 from django.contrib.auth.models import User, Group
 from rest_framework_bulk import (
     BulkListSerializer,
@@ -238,3 +238,12 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
         user.save()
         return user
+
+class VersionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Version
+        fields = (
+            'id',
+            'versao',
+            'status',
+        )

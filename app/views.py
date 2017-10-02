@@ -2,10 +2,10 @@ from django.shortcuts import render
 
 # Create your views here.
 from app.models import Mandado, Oficial, Telefone, Diligencia, Tipo_Diligencia, Estatus_Cumprimento, \
-    Foto, Audio, Comarca, Vara, Ordem, Json_sync
+    Foto, Audio, Comarca, Vara, Ordem, Version
 from app.serializers import MandadoSerializer, OficialSerializer, TelefoneSerializer,\
     DiligenciaSerializer, Tipo_DiligenciaSerializer, Estatus_CumprimetoSerializer, FotoSerializer, AudioSerializer, \
-    VaraSerializer, ComarcaSerializer, OrdemSerializer, UserSerializer
+    VaraSerializer, ComarcaSerializer, OrdemSerializer, UserSerializer, VersionSerializer
 from rest_framework import generics
 from django.contrib.auth.models import User
 from rest_framework import permissions
@@ -278,6 +278,15 @@ class UserDetail(generics.RetrieveAPIView):
     permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly,)
 
 
+class VersionList(generics.ListCreateAPIView):
+    queryset = Version.objects.all()
+    serializer_class = VersionSerializer
+    permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly,)
+
+class VersionDetail(generics.RetrieveAPIView):
+    queryset = Version.objects.all()
+    serializer_class = VersionSerializer
+    permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly,)
 
 
 

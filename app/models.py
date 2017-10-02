@@ -358,12 +358,15 @@ class Relatorio(models.Model):
         return 'Mandados:'+' '+str(self.relatorio)+' '+str(self.oficial)
 
 
-# para armazenar os arquivos de sincronização
-class Json_sync(models.Model):
-    oficial = models.ForeignKey(Oficial, blank=True, null=True)  # blank and null temporários
-    datetime = models.DateTimeField(blank=True, null=True)  #blank and null temporários
-    json = models.TextField()
-    aplicado = models.BooleanField(default=False)
-
+# para armazenar infomações de versão
+class Version(models.Model):
+    versao = models.CharField(max_length=30)
+    datetime = models.DateTimeField(auto_now_add=True)  #blank and null temporários
+    descricao = models.TextField()
+    status = models.CharField(max_length=2, choices=(('0', 'Obsoleta'),       #não funciona mais
+                                                     ('1', 'Desatualizada'),  #funciona mas pede atualização
+                                                     ('2', 'Atual'),          #da hora, rsrsrs
+                                                     ('3', 'Beta'),           #em teste
+                                                     ('4', 'Programada')))    #futura
     def __str__(self):
-        return str(self.oficial)+' '+str(datetime)
+        return str(self.versao)
