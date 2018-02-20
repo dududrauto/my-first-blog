@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="bbf4e045-e670-4ec2-8b7c-227d50b2e84d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/admin.py" afterPath="$PROJECT_DIR$/app/admin.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models.py" afterPath="$PROJECT_DIR$/app/models.py" />
     </list>
     <list id="9282e8ca-0bc1-4b2c-bf32-3e79676f8baf" name="New changelist" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mysite/settings.py" afterPath="$PROJECT_DIR$/mysite/settings.py" />
@@ -28,11 +28,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1134">
-              <caret line="369" column="56" lean-forward="false" selection-start-line="369" selection-start-column="56" selection-end-line="369" selection-end-column="56" />
+            <state relative-caret-position="257">
+              <caret line="43" column="87" lean-forward="false" selection-start-line="43" selection-start-column="87" selection-end-line="43" selection-end-column="87" />
               <folding>
                 <element signature="e#15#43#0" expanded="true" />
               </folding>
@@ -118,7 +118,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="admin.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="admin.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/admin.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="166">
@@ -176,8 +176,8 @@
         <option value="$PROJECT_DIR$/app/serializers.py" />
         <option value="$PROJECT_DIR$/app/views.py" />
         <option value="$PROJECT_DIR$/app/urls.py" />
-        <option value="$PROJECT_DIR$/app/models.py" />
         <option value="$PROJECT_DIR$/app/admin.py" />
+        <option value="$PROJECT_DIR$/app/models.py" />
       </list>
     </option>
   </component>
@@ -457,13 +457,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1462839926382</updated>
-    </task>
-    <task id="LOCAL-00071" summary="atualizacao">
-      <created>1474247370684</created>
-      <option name="number" value="00071" />
-      <option name="presentableId" value="LOCAL-00071" />
-      <option name="project" value="LOCAL" />
-      <updated>1474247370684</updated>
     </task>
     <task id="LOCAL-00072" summary="atualizacao">
       <created>1474248774891</created>
@@ -801,7 +794,14 @@
       <option name="project" value="LOCAL" />
       <updated>1519136520124</updated>
     </task>
-    <option name="localTasksCounter" value="120" />
+    <task id="LOCAL-00120" summary="correção para aparecer Azul nas Ações">
+      <created>1519137136899</created>
+      <option name="number" value="00120" />
+      <option name="presentableId" value="LOCAL-00120" />
+      <option name="project" value="LOCAL" />
+      <updated>1519137136900</updated>
+    </task>
+    <option name="localTasksCounter" value="121" />
     <servers />
   </component>
   <component name="TodoView">
@@ -904,7 +904,8 @@
     <MESSAGE value="alteração para proceder à sincronização em lote" />
     <MESSAGE value="alteração para criação do usuario e do oficial pelo app" />
     <MESSAGE value="controle do versionamento" />
-    <option name="LAST_COMMIT_MESSAGE" value="controle do versionamento" />
+    <MESSAGE value="correção para aparecer Azul nas Ações" />
+    <option name="LAST_COMMIT_MESSAGE" value="correção para aparecer Azul nas Ações" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1250,16 +1251,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1134">
-          <caret line="369" column="56" lean-forward="false" selection-start-line="369" selection-start-column="56" selection-end-line="369" selection-end-column="56" />
-          <folding>
-            <element signature="e#15#43#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/snippets/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="213">
@@ -1284,6 +1275,16 @@
           <caret line="119" column="0" lean-forward="true" selection-start-line="119" selection-start-column="0" selection-end-line="119" selection-end-column="0" />
           <folding>
             <element signature="e#15#47#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="257">
+          <caret line="43" column="87" lean-forward="false" selection-start-line="43" selection-start-column="87" selection-end-line="43" selection-end-column="87" />
+          <folding>
+            <element signature="e#15#43#0" expanded="true" />
           </folding>
         </state>
       </provider>

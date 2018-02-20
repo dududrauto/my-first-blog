@@ -41,7 +41,7 @@ class Mandado(models.Model):
                                                             #se ainda não verificado ou positivo 0
 
     #                           DADOS MANDADO
-    numero_mandado = models.IntegerField(verbose_name="Número do Mandado", unique=True)
+    numero_mandado = models.IntegerField(verbose_name="Número do Mandado", unique=False)
     ano_mandado = models.CharField(max_length=4, default=str(datetime.date.today().year))
     codigo_mandado = models.CharField(max_length=20, null=True, blank=True)
     data = models.DateField(default=django.utils.timezone.datetime.now, help_text="Data de recebimento.")
