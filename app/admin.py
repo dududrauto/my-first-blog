@@ -120,7 +120,7 @@ make_verde.short_description = "marque os mandados para VERDE"
 
 def make_azul(modeladmin, request, queryset):
     queryset.update(cor_urgencia=4)
-make_verde.short_description = "marque os mandados para AZUL"
+make_azul.short_description = "marque os mandados para AZUL"
 
 '''
 def make_con(modeladmin, request, queryset):
