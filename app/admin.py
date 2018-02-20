@@ -145,7 +145,7 @@ class MandadoAdmin(admin.ModelAdmin):
     ordering = ['numero_mandado']
     search_fields = ['numero_mandado', 'destinatario', 'rua']
     list_editable = []
-    list_filter = ['status_cumprimento', 'audiencia', 'conducao', 'cor_urgencia', 'ordem']
+    list_filter = ['ano_mandado', 'status_cumprimento', 'audiencia', 'conducao', 'cor_urgencia', 'ordem']
     list_max_show_all = 1000
     readonly_fields = ('ajustado_mapa', 'verificado_em_loco', )
     fieldsets = ((None, {#1
