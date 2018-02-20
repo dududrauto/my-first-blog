@@ -118,6 +118,10 @@ def make_verde(modeladmin, request, queryset):
     queryset.update(cor_urgencia=3)
 make_verde.short_description = "marque os mandados para VERDE"
 
+def make_azul(modeladmin, request, queryset):
+    queryset.update(cor_urgencia=4)
+make_verde.short_description = "marque os mandados para AZUL"
+
 '''
 def make_con(modeladmin, request, queryset):
     queryset.update(status_cumprimento=5)
@@ -167,7 +171,7 @@ class MandadoAdmin(admin.ModelAdmin):
             'admin/js/cep.js',
         )
 
-    actions = [make_av, make_pendente, make_nao_cumprido, make_amarelo, make_verde, make_vermelho, export_aviso]#
+    actions = [make_av, make_pendente, make_nao_cumprido, make_amarelo, make_verde, make_vermelho, make_azul, export_aviso]#
 
     inlines = [TelefoneInline,]
 
