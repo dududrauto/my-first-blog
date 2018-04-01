@@ -88,6 +88,7 @@ class MyPrint:
                 modelo_html += '<html>' \
                                '<head>' \
                                '<meta charset="utf-8" />' \
+                               '<base href="http://ofjusapp.pythonanywhere.com/">'\
                                '</head>' \
                                '<body>' \
                                '<div style="float: none;">' \
